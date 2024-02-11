@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Kevin Akumuo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+
+    <div id="header">
+        <img id="img-profile" src="/resources/profile_kevin.jpg" alt="">
+        <a href="#about-section">About Me</a>
+        <a href="#education-section">Education</a>
+        <a href="#experience-section">Experience</a>
+        <a href="#projects-section">Projects</a>
+        <a href="#contact-section">Contact Me</a>
+    </div>
+
+    <main id="content-main">
+        <div id="content-carousel">
+            <section id="about-section" class="section-content hidden">
+                <img class="img-background" src="/resources/profile_kevin.jpg" alt="">
+                <h1>About Me</h1>
+                <p>
+                Hi, my name is Kevin and I'm a Java and MSSQL Developer professionally for about 5 years.
+                My journey in the tech world has been exciting, and I thrive on challenges that push me to grow and innovate.
+                </p>
+            </section>
+            <section id="education-section" class="section-content hidden">
+                <img class="img-background" src="/resources/njit.jpg" alt="">
+                <h1>Education</h1>
+                <p>
+                    I graduated from the New Jersey Institute of Technology (NJIT) with a Bachelor of Science in Computer Science and a minor in Applied Mathematics.
+                    During my time at NJIT, I delved into various courses, including Data Structures and Algorithms, Database Systems, Intensive Programming in Linux, and Introduction to Artificial Intelligence.
+                </p>
+            </section>
+            <section id="experience-section" class="section-content hidden">
+                <img class="img-background" src="/resources/experience.jpg" alt="">
+                <h1>Experience</h1>
+                <p>
+                    My professional journey has been diverse, starting from my internship days to my current role as an Applications Developer II at United Parcel Service (UPS).
+                    At UPS, I've had the opportunity to contribute to the development of applications managing millions of contact and account details for sales and marketing purposes. 
+                    From crafting daily ETL processes to working with Apache Karaf containers and conducting knowledge transfer sessions, I've worn multiple hats and embraced every challenge with enthusiasm.
+                    In addition to my role at UPS, I've also served as an Undergraduate Teaching Assistant at NJIT, where I mentored students in Java and C++, and volunteered as an ACM Tutor, assisting students in various CS courses. 
+                    These experiences have not only honed my technical skills but also strengthened my ability to communicate complex concepts effectively.
+                </p>
+            </section>
+            <section id="projects-section" class="section-content hidden">
+                <img class="img-background" src="/resources/projects.webp" alt="">
+                <h1>Projects</h1>
+                <div id="project-list">
+                    <div id="project-item">
+                        <header>
+                            <h3>Ludo Card Game</h3>
+                            <img src="/resources/icons/icon-godot.png" alt="Godot Icon">
+                            <img src="/resources/icons/icon-gdscript.webp" alt="GDScript Icon">
+                        </header>
+                        <img src="/resources/ludo.webp" alt="" class="img-thumbnail">
+                        <p class="item-desc">Created a board game in Godot with gameplay elements from Ludo and traditional deck building games.</p>
+                        <footer>
+                            <button id="btn-git-ref">View On Github</button>
+                            <button id="btn-exec-ref">Run > </button>
+                        </footer>
+                    </div>
+                    
+                    <div id="project-item">
+                        <header>
+                            <h3>Smart Home Web Server</h3>
+                            <img src="/resources/icons/icon-html.webp" alt="HTML Icon">
+                            <img src="/resources/icons/icon-css.webp" alt="CSS Icon">
+                            <img src="/resources/icons/icon-typescript.webp" alt="JavaScript Icon">
+                            <img src="/resources/icons/icon-python.webp" alt="Python Icon">
+                        </header>
+                        <img src="/resources/smarthome.jpg" alt="" class="img-thumbnail">
+                        <p class="item-desc">Created a web server application for managing multiple smart home bulbs and motion sensors. Realtime data of motion sensors is collected through RocketMQ.</p>
+                        <footer>
+                            <button id="btn-git-ref">View On Github</button>
+                            <button id="btn-exec-ref">Run > </button>
+                        </footer>
+                    </div>
+
+                    <div id="project-item">
+                        <header>
+                            <h3>Smart Lighting Client</h3>
+                            <img src="/resources/icons/icon-java.webp" alt="Java Icon">
+                        </header>
+                        <img src="/resources/smartlighting.webp" alt="" class="img-thumbnail">
+                        <p class="item-desc">Developed a desktop client through Java to connect to smart bulbs and light strips. Application allows for color customization and lighting synchronization to videos.</p>
+                        <footer>
+                            <button id="btn-git-ref">View On Github</button>
+                            <button id="btn-exec-ref">Run > </button>
+                        </footer>
+                    </div>
+                    
+                    <div id="project-item">
+                        <header>
+                            <h3>Transportation Modelling</h3>
+                            <img src="/resources/icons/icon-python.webp" alt="Python Icon">
+                            <img src="/resources/icons/icon-rhino.png" alt="Rhino Icon">
+                        </header>
+                        <img src="/resources/transportationmodelling.jpg" alt="" class="img-thumbnail">
+                        <p class="item-desc">Assisted in creating an analytics platform for the KPF Architecture Firm to ingest ArcGIS data and generate metrics related to walkability, sunlight, foot traffic etc.</p>
+                        <footer>
+                            <button id="btn-git-ref">View On Github</button>
+                            <button id="btn-exec-ref">Run > </button>
+                        </footer>
+                    </div>
+
+                    <div id="project-item">
+                        <header>
+                            <h3>Linux Terminal Through C</h3>
+                            <img src="/resources/icons/icon-c.png" alt="C Icon">
+                        </header>
+                        <img src="/resources/linux.jpg" alt="" class="img-thumbnail">
+                        <p class="item-desc">Created a C program to mimic a Linux terminal, making use of the Cygwin library for command execution and Posix library for parallel processing.</p>
+                        <footer>
+                            <button id="btn-git-ref">View On Github</button>
+                            <button id="btn-exec-ref">Run > </button>
+                        </footer>
+                    </div>
+                    
+                    <div id="project-item">
+                        <header>
+                            <h3>Pong with Machine Learning</h3>
+                            <img src="/resources/icons/icon-csharp.png" alt="C# Icon">
+                            <img src="/resources/icons/icon-unity.webp" alt="Unity Icon">
+                        </header>
+                        <img src="/resources/pong.png" alt="" class="img-thumbnail">
+                        <p class="item-desc">Used Unity’s ML agents library to create an AI opponent for a pong-like microgame.</p>
+                        <footer>
+                            <button id="btn-git-ref">View On Github</button>
+                            <button id="btn-exec-ref">Run > </button>
+                        </footer>
+                    </div>
+                    
+                    <div id="project-item">
+                        <header>
+                            <h3>Color Palette Generator</h3>
+                            <img src="/resources/icons/icon-python.webp" alt="Python Icon">
+                        </header>
+                        <img src="/resources/colorpalette.jpg" alt="" class="img-thumbnail">
+                        <p class="item-desc">Used k-means clustering techniques to identify a color palette from a photograph.</p>
+                        <footer>
+                            <button id="btn-git-ref">View On Github</button>
+                            <button id="btn-exec-ref">Run > </button>
+                        </footer>
+                    </div>
+                </div>
+                <p></p>
+            </section>
+
+            <section id="contact-section" class="section-content hidden">
+                <img class="img-background" src="/resources/contact.webp" alt="">
+                <h1>Contact</h1>
+                <section id="contact">
+                    <h3>Email</h3><a href="mailto:akumuok@gmail.com">akumuok@gmail.com</a>
+                    <h3>LinkedIn</h3><a href="https://www.linkedin.com/in/kevin-akumuo/">https://www.linkedin.com/in/kevin-akumuo/</a>
+                    <h3>GitHub</h3><a href="https://github.com/foxfen23">https://github.com/foxfen23</a>
+                </section>
+            </section>
+        </div>
+        <aside id="content-controls">
+            <button id="btn-prev" class="material-symbols-outlined">arrow_upward</button>
+            <div id="section-indicator-group" >
+                <span id="sect-ind-about-section" class="material-symbols-outlined section-indicator">radio_button_checked</span>
+                <span id="sect-ind-education-section" class="material-symbols-outlined section-indicator">radio_button_unchecked</span>
+                <span id="sect-ind-experience-section" class="material-symbols-outlined section-indicator">radio_button_unchecked</span>
+                <span id="sect-ind-projects-section" class="material-symbols-outlined section-indicator">radio_button_unchecked</span>            
+                <span id="sect-ind-contact-section" class="material-symbols-outlined section-indicator">radio_button_unchecked</span>            
+            </div>
+            <button id="btn-next" class="material-symbols-outlined">arrow_downward</button>
+        </aside>
+    </main>
+
+    <script type="module" src="../dist/main.js"></script>
+</body>
+</html>
