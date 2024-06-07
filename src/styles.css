@@ -1,0 +1,39 @@
+.slide-in {
+    position: relative; left: 100px;
+    animation: slide .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+
+@keyframes slide {
+    to { position: relative; left: 0; }
+}
+
+.stretch-in {
+    position: relative; width: 0;
+    overflow-x: hidden;
+    border-right: solid black;
+    animation: stretch .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+
+@keyframes stretch {
+    to { position: relative; width: 100%; }
+}
+
+.stretch-and-slide {
+    position: relative; width: 0;
+    position: relative; left: 100px;
+    overflow-x: hidden;
+    border-right: solid black;
+    animation: stretch .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards, 
+        slide .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards
+    ;
+}
+
+
+.slide-up {
+    position: relative; top: 100px;
+    animation: slide-up .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards
+}
+
+@keyframes slide-up {
+    to {top: 0px}
+}
