@@ -224,7 +224,7 @@ export const App = () => {
             <div id="profileImgGroup" className="slide-up" style={{display: 'flex', flexDirection: "column", alignItems: "center", color: curColorScheme.accent}}>
                 <div style={{textAlign: "center", fontWeight: "bolder", marginBottom: "8px"}}><p>{curTime[0]}</p><p>{curTime[1]}</p></div>
                 <h3>Kevin Akumuo</h3>
-                <img src="/resources/profile_kevin.jpg" style={{width: "100px", height: "100px", objectFit: "cover", alignSelf: "center"}}/>
+                <img src="/resources/profile_kevin.jpg" style={{width: "100px", height: "100px", objectFit: "cover", alignSelf: "center", marginTop: "1vh"}}/>
             </div>
             <div className="slide-up" style={{display: 'grid', gridTemplateRows: contentList.map(_ => "auto").join(" "), gap: "10px", marginRight: "auto", marginLeft: "auto", width: "80%"}}>
                 {contentList.map((item, itemI) => 
@@ -232,13 +232,15 @@ export const App = () => {
                 )}
             </div>
             <div className="slide-up" style={{display: "flex", flexDirection: "column", alignItems: "center", gap: "10px"}}>
-                <p className="slide-up" > Light</p>
+                <p className="slide-up" style={{alignItems: 'center', display: 'grid', gridTemplateColumns: "auto auto", gap: '4px'}} >
+                    <MatIcons.LightMode /> Light</p>
                 <input  className="slide-up" type="range" min={0} max={colorSchemes.length-1}
                     style={{writingMode: "vertical-lr", direction: "rtl", verticalAlign: "middle"
                         ,   background: "linear-gradient(to right, #82CFD0 0%, #82CFD0 50%, #fff 50%, #fff 100%)"
                         , color: curColorScheme.font}} 
                     onChange={ev => handleColorSchemeUpdate(ev.target.value)} />
-                <p className="slide-up" >Dark</p>
+                <p className="slide-up" style={{alignItems: 'center', display: 'grid', gridTemplateColumns: "auto auto", gap: '4px'}} >
+                     <MatIcons.DarkMode /> Dark</p>
             </div>
             <div style={{position: 'relative', display: "flex", alignItems: "center", justifyContent: "space-evenly"}}>
                 <a className="slide-up hover-slideup" href="https://github.com/kakumuo" target="_blank"><MatIcons.GitHub className="clickable" htmlColor={curColorScheme.accent} /></a>

@@ -19,69 +19,60 @@ type ProjectItemData = {
 
 const projectList:ProjectItemData[] = [
     {
-        title: "Lorem, ipsum dolor 1",
-        imagePath: "/resources/placeholder1.jpg",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
-        softwareUsed: ["Loreipsum", "IpsumLorem"],
-        projectLink: 'https://www.google.com', 
-        startMonth: "Jan 2023", 
-        endMonth: "Feb 2023"
+        title: "Ludo Card Game",
+        imagePath: "/resources/ludo.webp",
+        description: "Created a board game in Godot with gameplay elements from Ludo and traditional deck building games.",
+        softwareUsed: ["Godot", "GodotScript"],
+        startMonth: "Sept 2023", 
+        endMonth: "Oct 2023"
     }, 
     {
-        title: "Lorem, ipsum dolor 2",
-        imagePath: "/resources/placeholder2.webp",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
-        softwareUsed: ["Loreipsum", "IpsumLorem"], 
-        startMonth: "Jan 2023", 
-        endMonth: "Feb 2023"
+        title: "Smart Home Web Server",
+        imagePath: "/resources/smarthome.jpg",
+        description: "Created a web server application for managing multiple smart home bulbs and motion sensors. Realtime data of motion sensors is collected through RocketMQ.",
+        softwareUsed: ["Python", "RocketMQ", "Javascript", "HTML", "CSS"], 
+        startMonth: "Oct 2022", 
+        endMonth: "Nov 2022"
     }, 
     {
-        title: "Lorem, ipsum dolor 3",
-        imagePath: "/resources/placeholder1.jpg",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
-        softwareUsed: ["Loreipsum", "IpsumLorem"], 
-        startMonth: "Jan 2023", 
-        endMonth: "Feb 2023"
+        title: "Smart Lighting Client",
+        imagePath: "/resources/smartlighting.webp",
+        description: "Developed a desktop client through Java to connect to smart bulbs and light strips. Application allows for color customization and lighting synchronization to videos.",
+        softwareUsed: ["Java"], 
+        startMonth: "Nov 2020", 
+        endMonth: "Nov 2020"
     }, 
     {
-        title: "Lorem, ipsum dolor 3",
-        imagePath: "/resources/placeholder1.jpg",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
-        softwareUsed: ["Loreipsum", "IpsumLorem"], 
-        startMonth: "Jan 2023", 
-        endMonth: "Feb 2023"
+        title: "Transportation Modelling",
+        imagePath: "/resources/transportationmodelling.jpg",
+        description: "Assisted in creating an analytics platform for the KPF Architecture Firm to ingest ArcGIS data and generate metrics related to walkability, sunlight, foot traffic etc.",
+        softwareUsed: ["Rhino", "Python"], 
+        startMonth: "Jan 2019", 
+        endMonth: "June 2019"
     }, 
     {
-        title: "Lorem, ipsum dolor 3",
-        imagePath: "/resources/placeholder1.jpg",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
-        softwareUsed: ["Loreipsum", "IpsumLorem"], 
-        startMonth: "Jan 2023", 
-        endMonth: "Feb 2023"
+        title: "Linux Terminal Through",
+        imagePath: "/resources/linux.jpg",
+        description: "Created a C program to mimic a Linux terminal, making use of the Cygwin library for command execution and Posix library for parallel processing.",
+        softwareUsed: ["C", "Linux"], 
+        startMonth: "Jan 2019", 
+        endMonth: "Jan 2019"
     }, 
     {
-        title: "Lorem, ipsum dolor 2",
-        imagePath: "/resources/placeholder2.webp",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
-        softwareUsed: ["Loreipsum", "IpsumLorem"], 
-        startMonth: "Jan 2023", 
-        endMonth: "Feb 2023"
+        title: "Pong with Machine Learning",
+        imagePath: "/resources/pong.png",
+        description: "Used Unity’s ML agents library to create an AI opponent for a pong-like microgame.",
+        softwareUsed: ["Unity", "Unity ML Agents"], 
+        startMonth: "Dec 2019", 
+        endMonth: "Dec 2019"
     }, 
     {
-        title: "Lorem, ipsum dolor 2",
-        imagePath: "/resources/placeholder2.webp",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
-        softwareUsed: ["Loreipsum", "IpsumLorem"], 
-        startMonth: "Jan 2023", 
-        endMonth: "Feb 2023"
-    }, 
-    {
-        title: "Lorem, ipsum dolor 3",
-        imagePath: "/resources/placeholder1.jpg",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
-        softwareUsed: ["Loreipsum", "IpsumLorem"], 
-        startMonth: "Jan 2023", 
-        endMonth: "Feb 2023"
+        title: "Color Palette Generator",
+        imagePath: "/resources/colorpalette.jpg",
+        description: "Used k-means clustering techniques to identify a color palette from a photograph.",
+        softwareUsed: ["Python"], 
+        startMonth: "June 2018", 
+        endMonth: "June 2018"
     }
 ]
 
@@ -90,7 +81,7 @@ export const Projects = () => {
     const [targetShowAmount, setTargetShowAmount] = React.useState(4)
     
     return <div style={{width: "100%", height: "100%"}}>
-        <main style={{ display: "flex", flexWrap: "wrap", width: "100%", alignItems: "center", justifyContent: 'center', marginTop: "5vh"}}>
+        <main style={{ display: "flex", flexWrap: "wrap", width: "100%", alignItems: "start", justifyContent: 'center', marginTop: "5vh"}}>
             {projectList.filter((_, i) => i < targetShowAmount).map((projectItem, projectI) => 
                 <ProjectItem projectItem={projectItem} animDelayStyle={{animationDuration: `${.4 * (projectI%4)}s`}} />
             )}

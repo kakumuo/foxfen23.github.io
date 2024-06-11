@@ -6,12 +6,12 @@ export const ContactMe = () => {
     return <form action="mailto:akumuok@gmail.com" 
         style={{display: "flex", width: "100%", height: "20vh"
         , alignItems: 'center', justifyContent: "center", gap: "20px"}}>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est sequi dolorum vero?</p>
+        <p>Let me know if you have any questions or concerns!</p>
         <input type="submit" className="clickable" style={{
                 width: "auto", border: "none", backgroundColor: curColorScheme.secondary, color: curColorScheme.font, letterSpacing: "4px", fontWeight: "bolder",
                 padding: "20px"
         }}
-            value={"Send Email"}></input>
+            value={"Email"}></input>
     </form>
 }
 

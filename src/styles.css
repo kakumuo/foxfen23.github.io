@@ -13,11 +13,11 @@
     to { position: relative; left: 0; }
 }
 
-.anim-cascade *:nth-child(1) {animation-duration: .5s;}
-.anim-cascade *:nth-child(2) {animation-duration: 1s;}
-.anim-cascade *:nth-child(3) {animation-duration: 1.3s;}
-.anim-cascade *:nth-child(4) {animation-duration: 1.7s;}
-.anim-cascade *:nth-child(5) {animation-duration: 2s;}
+.anim-cascade:nth-child(1) {animation-duration: .5s;}
+.anim-cascade:nth-child(2) {animation-duration: 1s;}
+.anim-cascade:nth-child(3) {animation-duration: 1.3s;}
+.anim-cascade:nth-child(4) {animation-duration: 1.7s;}
+.anim-cascade:nth-child(5) {animation-duration: 2s;}
 
 .stretch-in {
     position: relative; width: 0;
