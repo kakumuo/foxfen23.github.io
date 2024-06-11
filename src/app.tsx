@@ -214,9 +214,10 @@ export const App = () => {
     return (
     <ColorSchemeContext.Provider value={curColorScheme}>
     <div onScroll={(ev) => ev.preventDefault()} style={{ position: "relative", padding: "20px", display: "flex", flexDirection: "row", 
-        background: `linear-gradient(${curColorScheme.background} 60%, ${curColorScheme.background}, ${curColorScheme.accent})`, 
+        background: `linear-gradient(${curColorScheme.background} 90%, ${curColorScheme.background}, ${curColorScheme.accent})`, 
         color: curColorScheme.font}}>
-        <div className="cursor-outer" style={outerStyle}></div>
+        <div className="page-grain" style={{position: 'absolute', top: '0', right: '0', width: "100%", height: "100%", pointerEvents: 'none', zIndex: "1000"}} />
+        <div className="cursor-outer" style={outerStyle}></div> 
         <div className="cursor-inner" style={innerStyle} />
         
         
