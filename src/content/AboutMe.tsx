@@ -1,53 +1,98 @@
 import React from "react"
+import {Tag} from './Projects'
+import { ColorSchemeContext } from "../app"
 
 type AboutItem = {
     title:string, 
+    subtitle1:string, 
+    subtitle2?:string,
+    date:{startDate:string, endDate:string}, 
     description:string, 
-    imagePath:string
+    imagePath:string,
+    tags:string[]
 }
 
 const aboutItemList:AboutItem[] = [
     {
-        title: 'Education', 
-        description: `I graduated from the New Jersey Institute of Technology (NJIT) with a Bachelor of Science in Computer Science and a minor in Applied Mathematics.
-         During my time at NJIT, I delved into various courses, including Data Structures and Algorithms, Database Systems, Intensive Programming in Linux, and Introduction to Artificial Intelligence.`,
-        // imagePath: "/resources/njit.jpg"
-        imagePath: "/resources/placeholder1.jpg"
+        title: 'Lorem, ipsum', 
+        subtitle1: 'Lorem ipsum dolor sit',
+        date: {
+            startDate: "Sept 2015",
+            endDate: "Sept 2019" 
+        },
+        description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellendus 
+        nulla odio laudantium sint? Odit placeat tenetur dolore nesciunt consectetur recusandae 
+        eaque molestias labore sapiente nulla officia cum ullam ducimus necessitatibus nemo quis 
+        quae, sunt velit laudantium consequuntur, at itaque? Harum atque commodi eum nesciunt 
+        nemo veniam sapiente esse perspiciatis?`,
+        imagePath: "/resources/placeholder1.jpg", 
+        tags: ["test1", "test2"]
     }, 
     {
-        title: 'Experience', 
-        description: `My professional journey has been diverse, starting from my internship days to my current role as an Applications Developer II at United Parcel Service (UPS).
-                    At UPS, I've had the opportunity to contribute to the development of applications managing millions of contact and account details for sales and marketing purposes. 
-                    From crafting daily ETL processes to working with Apache Karaf containers and conducting knowledge transfer sessions, I've worn multiple hats and embraced every challenge with enthusiasm.
-                    In addition to my role at UPS, I've also served as an Undergraduate Teaching Assistant at NJIT, where I mentored students in Java and C++, and volunteered as an ACM Tutor, assisting students in various CS courses. 
-                    These experiences have not only honed my technical skills but also strengthened my ability to communicate complex concepts effectively.`, 
-        // imagePath: "/resources/experience.jpg"
-        imagePath: "/resources/placeholder2.jpg"
+        title: 'Lorem, ipsum dolor', 
+        subtitle1: 'Lorem ipsum dolor sit',
+        subtitle2: 'Lorem ipsum dolor sit dolor sit',
+        date: {
+            startDate: "Sept 2015",
+            endDate: "Sept 2019" 
+        },
+        description: `Officia cum ullam ducimus necessitatibus nemo quis 
+        quae, sunt velit laudantium consequuntur, at itaque? Harum atque commodi eum nesciunt 
+        nemo veniam sapiente esse perspiciatis?`,
+        imagePath: "/resources/placeholder1.jpg", 
+        tags: ["test1", "test2"]
+    }, 
+    {
+        title: 'Lorem, ipsum dolor', 
+        subtitle1: 'Lorem ipsum dolor sit',
+        date: {
+            startDate: "Sept 2015",
+            endDate: "Sept 2019" 
+        },
+        description: `Officia cum ullam ducimus necessitatibus nemo quis 
+        quae, sunt velit laudantium consequuntur, at itaque? Harum atque commodi eum nesciunt 
+        nemo veniam sapiente esse perspiciatis?`,
+        imagePath: "/resources/placeholder1.jpg", 
+        tags: ["test1", "test2"]
     }
 ]
 
 export const AboutMe = () => {
-    const [curPageIndex, setCurPageIndex] = React.useState(0)
-
-    const handleNextPage = (asc:boolean) => {
-        if(asc)
-            setCurPageIndex((curPageIndex + 1) % aboutItemList.length)
-        else 
-            setCurPageIndex((curPageIndex - 1) % aboutItemList.length)
-    }
-
-    return <div style={{display: 'grid', gridTemplateColumns: "auto 10%"}}>
-        <main style={{position: "relative"}}>
-            <img style={{width: "80vw", height: "80vh",objectFit: "cover", filter: "contrast(100%) saturate(20%)"}} src={aboutItemList[curPageIndex].imagePath} alt="" />
-            <div style={{position: "absolute", bottom:"0", left: "0", margin: "50px", width: "40vw"}}>
-                <h2 style={{color: "white", fontWeight: "bold", fontSize: "50px"}}>{aboutItemList[curPageIndex].title}</h2>
-                <p style={{color: "white", fontWeight: "bold", fontSize: "20px"}}>{aboutItemList[curPageIndex].description}</p>
-            </div>
-        </main>
-        <aside style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-            <button onClick={()=>handleNextPage(true)}>Prev</button>
-            {aboutItemList.map((_, itemI) => <p>{curPageIndex == itemI ? "[X]" : "[ ]"}</p>)}
-            <button onClick={()=>handleNextPage(true)} >Next</button>
-        </aside>
+    return <div style={{marginTop: "2vh"}}>
+        {aboutItemList.map((aboutItem, aboutI) => <TimelineItem aboutItem={aboutItem} isLastItem={aboutI == aboutItemList.length - 1} />)}
     </div>
+}
+
+
+const TimelineItem = ({aboutItem, isLastItem}:{aboutItem:AboutItem, isLastItem:boolean}) => {
+    const curColorScheme = React.useContext(ColorSchemeContext)
+    const marginHeight = "10vh"
+    const markerDiam = "1vw"
+   return (<div className="timelineItem anim-cascade" style={{display: "grid", gridTemplateColumns: "auto auto auto", gap: "48px", marginBottom: `${isLastItem ? 0 : marginHeight}`, borderRight: `solid ${curColorScheme.accent} 4px`}}>
+    {/* timeline */}
+    <div style={{position: 'relative', transform: "translateY(50%)", marginLeft: "3vw"}}>
+        <div style={{border: "solid", backgroundColor: curColorScheme.accent, borderColor: curColorScheme.accent, width: markerDiam, height: markerDiam, borderRadius: markerDiam}} />
+        <div style={{transform: "translateY(-.5vw)", backgroundColor: curColorScheme.accent, borderColor: curColorScheme.accent, borderRight: "solid", borderLeft: 'solid', height:`${isLastItem ? '0' : `calc(100% + ${marginHeight})`}`, width: ".5vw", marginLeft: "auto", marginRight: "auto"}} />
+    </div>
+
+    <div style={{position: "relative"}}>
+        <img style={{position: "absolute",height: "200px"}} src={aboutItem.imagePath}/>
+        <div style={{
+            border: "solid 2px",
+            borderColor: curColorScheme.accent, 
+            width: "200px", height: "200px", transform: "translate(4%, 4%)"
+        }} />
+    </div>
+
+    <div style={{fontSize: "larger", display: "flex", flexDirection: 'column', justifyContent: "end"}}>
+        <h2 style={{color: curColorScheme.primary}}>{aboutItem.title}</h2>
+        <h5 style={{color: curColorScheme.secondary}}>{aboutItem.subtitle1}</h5>
+        {aboutItem.subtitle2 && <h6>{aboutItem.subtitle2}</h6>}
+        <h6 style={{color: curColorScheme.accent}}>{`${aboutItem.date.startDate}-${aboutItem.date.endDate}`}</h6>
+        <p>{aboutItem.description}</p>
+        <div style={{display: "flex", gap: "4px", marginTop: "10px"}}>{aboutItem.tags.map(tag => <Tag title={tag}/>)}</div>
+    </div>
+
+   
+</div>) 
 }

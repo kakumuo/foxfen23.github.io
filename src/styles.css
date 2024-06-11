@@ -1,3 +1,9 @@
+* {
+    scroll-behavior:  smooth;
+    cursor: none;
+    transition: .5s;
+}
+
 .slide-in {
     position: relative; left: 100px;
     animation: slide .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
@@ -7,10 +13,16 @@
     to { position: relative; left: 0; }
 }
 
+.anim-cascade *:nth-child(1) {animation-duration: .5s;}
+.anim-cascade *:nth-child(2) {animation-duration: 1s;}
+.anim-cascade *:nth-child(3) {animation-duration: 1.3s;}
+.anim-cascade *:nth-child(4) {animation-duration: 1.7s;}
+.anim-cascade *:nth-child(5) {animation-duration: 2s;}
+
 .stretch-in {
     position: relative; width: 0;
     overflow-x: hidden;
-    border-right: solid black;
+    border-right: solid;
     animation: stretch .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
 
@@ -28,12 +40,111 @@
     ;
 }
 
-
 .slide-up {
     position: relative; top: 100px;
     animation: slide-up .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards
 }
 
+.slide-up:nth-child(1) {animation-duration: .4s;}
+.slide-up:nth-child(2) {animation-duration: .8s;}
+.slide-up:nth-child(3) {animation-duration: 1.2s;}
+.slide-up:nth-child(4) {animation-duration: 1.6s;}
+.slide-up:nth-child(5) {animation-duration: 2s;}
+.slide-up:nth-child(6) {animation-duration: 2.4s;}
+
 @keyframes slide-up {
     to {top: 0px}
+}
+
+/* nav */
+.navBtn-hover div {
+    z-index: "1";
+    animation: nav-hover .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards
+}
+
+@keyframes nav-hover {
+    from {
+        border-right: solid;
+        height: 0;
+    }
+
+    to {
+        border-right: solid;
+        height: 100%;
+    }
+}
+
+
+.navBtn-selected div {
+    z-index: 10;
+    position: absolute;
+    animation: nav-pan .5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards
+}
+
+
+@keyframes nav-pan {
+    from {
+        border-right: solid;
+        height: 100%;
+        width: 0;
+    }
+
+    to {
+        border-right: solid;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.project-card {
+    transition: .2s ease-in-out;
+}
+
+.project-card *{
+    transition: .2s ease-in-out;
+}
+
+.project-card:hover {
+    border-top: 1px solid;
+    backdrop-filter: invert(30%);
+    border-radius: 8px;
+    transform: translateY(-8px);
+}
+
+.project-card:hover > a > span {
+    transform: translateX(20px);
+}
+
+
+/* nav button links */
+.hover-slideup {
+    transition: .1s ease-in-out;
+}
+
+.hover-slideup:hover {
+    transform: translateY(-5px);
+}
+
+
+
+/* projects page */
+.showMoreButton {
+    transition: .2s ease-in-out;
+}
+
+.showMoreButton:hover {
+    transform: translateY(-4px);
+}
+
+
+/* timeline */
+
+
+.timelineItem, .timelineItem *{
+    transition: .2s ease-in-out;
+}
+
+
+.timelineItem:hover {
+    transform: translateY(-8px);
 }

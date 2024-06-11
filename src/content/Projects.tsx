@@ -1,5 +1,8 @@
 
 import React from "react"
+import * as MatIcon from '@mui/icons-material'
+import '../styles.css'
+import { ColorSchemeContext } from "../app"
 
 
 
@@ -7,107 +10,146 @@ import React from "react"
 type ProjectItemData = {
     title:string, 
     imagePath:string, 
+    startMonth:string,
+    endMonth:string,
     description:string, 
+    projectLink?:string,
     softwareUsed:string[]
 }
 
 const projectList:ProjectItemData[] = [
     {
-        title: "Ludo Card Game",
-        imagePath: "/resources/ludo.webp",
-        description: "Created a board game in Godot with gameplay elements from Ludo and traditional deck building games.",
-        softwareUsed: ["Godot", "GDScript"]
-    },
+        title: "Lorem, ipsum dolor 1",
+        imagePath: "/resources/placeholder1.jpg",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
+        softwareUsed: ["Loreipsum", "IpsumLorem"],
+        projectLink: 'https://www.google.com', 
+        startMonth: "Jan 2023", 
+        endMonth: "Feb 2023"
+    }, 
     {
-        title: "Smart Home Web Server",
-        imagePath: "/resources/smarthome.jpg",
-        description: "Created a web server application for managing multiple smart home bulbs and motion sensors. Realtime data of motion sensors is collected through RocketMQ.",
-        softwareUsed: ["HTML", "CSS", "JavaScript", "Python"]
-    },
+        title: "Lorem, ipsum dolor 2",
+        imagePath: "/resources/placeholder2.webp",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
+        softwareUsed: ["Loreipsum", "IpsumLorem"], 
+        startMonth: "Jan 2023", 
+        endMonth: "Feb 2023"
+    }, 
     {
-        title: "Smart Lighting Client",
-        imagePath: "/resources/smartlighting.webp",
-        description: "Developed a desktop client through Java to connect to smart bulbs and light strips. Application allows for color customization and lighting synchronization to videos.",
-        softwareUsed: ["Java"]
-    },
+        title: "Lorem, ipsum dolor 3",
+        imagePath: "/resources/placeholder1.jpg",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
+        softwareUsed: ["Loreipsum", "IpsumLorem"], 
+        startMonth: "Jan 2023", 
+        endMonth: "Feb 2023"
+    }, 
     {
-        title: "Transportation Modelling",
-        imagePath: "/resources/transportationmodelling.jpg",
-        description: "Assisted in creating an analytics platform for the KPF Architecture Firm to ingest ArcGIS data and generate metrics related to walkability, sunlight, foot traffic etc.",
-        softwareUsed: ["Python", "Rhino"]
-    },
+        title: "Lorem, ipsum dolor 3",
+        imagePath: "/resources/placeholder1.jpg",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
+        softwareUsed: ["Loreipsum", "IpsumLorem"], 
+        startMonth: "Jan 2023", 
+        endMonth: "Feb 2023"
+    }, 
     {
-        title: "Linux Terminal Through C",
-        imagePath: "/resources/linux.jpg",
-        description: "Created a C program to mimic a Linux terminal, making use of the Cygwin library for command execution and Posix library for parallel processing.",
-        softwareUsed: ["C"]
-    },
+        title: "Lorem, ipsum dolor 3",
+        imagePath: "/resources/placeholder1.jpg",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
+        softwareUsed: ["Loreipsum", "IpsumLorem"], 
+        startMonth: "Jan 2023", 
+        endMonth: "Feb 2023"
+    }, 
     {
-        title: "Pong with Machine Learning",
-        imagePath: "/resources/pong.png",
-        description: "Used Unity’s ML agents library to create an AI opponent for a pong-like microgame.",
-        softwareUsed: ["C#", "Unity"]
-    },
+        title: "Lorem, ipsum dolor 2",
+        imagePath: "/resources/placeholder2.webp",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
+        softwareUsed: ["Loreipsum", "IpsumLorem"], 
+        startMonth: "Jan 2023", 
+        endMonth: "Feb 2023"
+    }, 
     {
-        title: "Color Palette Generator",
-        imagePath: "/resources/colorpalette.jpg",
-        description: "Used k-means clustering techniques to identify a color palette from a photograph.",
-        softwareUsed: ["Python"]
-    }    
+        title: "Lorem, ipsum dolor 2",
+        imagePath: "/resources/placeholder2.webp",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
+        softwareUsed: ["Loreipsum", "IpsumLorem"], 
+        startMonth: "Jan 2023", 
+        endMonth: "Feb 2023"
+    }, 
+    {
+        title: "Lorem, ipsum dolor 3",
+        imagePath: "/resources/placeholder1.jpg",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla voluptas ducimus nihil, reiciendis beatae eveniet.",
+        softwareUsed: ["Loreipsum", "IpsumLorem"], 
+        startMonth: "Jan 2023", 
+        endMonth: "Feb 2023"
+    }
 ]
 
 export const Projects = () => {
-    const [searchTags, setSearchTags] = React.useState<string[]>([])
-    const searchRef = React.useRef<HTMLInputElement>(null)
-
-    const handleSearch = (ev:React.KeyboardEvent<HTMLInputElement>) => {
-        if(searchRef.current && searchRef.current.value && ev.key == 'Enter'){
-            setSearchTags([...searchTags, searchRef.current.value])
-            searchRef.current.value = ""
-        }
-    }
-
-    const handleCloseSearchTag = (searchTagI:number) => {
-        setSearchTags(searchTags.filter((_, i) => i != searchTagI))
-    }
-
+    const curColorScheme = React.useContext(ColorSchemeContext)
+    const [targetShowAmount, setTargetShowAmount] = React.useState(4)
+    
     return <div style={{width: "100%", height: "100%"}}>
-        <header>
-            <input type="search" ref={searchRef} onKeyDown={ev => handleSearch(ev)}/>
-            <div id="tagList" style={{display: "flex", gap: "10px", height: "4vh", alignItems: "center"}}>
-                {searchTags.map((searchTag, i) => <Tag title={searchTag} closable onClose={() => handleCloseSearchTag(i)}/>)}
-            </div>
-        </header>
-
-        <main style={{border: "solid", display: "flex", flexWrap: "wrap", alignItems: "center"}}>
-            {projectList.map(projectItem => 
-                <ProjectItem 
-                    title={projectItem.title} 
-                    imagePath={projectItem.imagePath} 
-                    description={projectItem.description}
-                    tags={projectItem.softwareUsed}
-                />
+        <main style={{ display: "flex", flexWrap: "wrap", width: "100%", alignItems: "center", justifyContent: 'center', marginTop: "5vh"}}>
+            {projectList.filter((_, i) => i < targetShowAmount).map((projectItem, projectI) => 
+                <ProjectItem projectItem={projectItem} animDelayStyle={{animationDuration: `${.4 * (projectI%4)}s`}} />
             )}
         </main>
 
-        <footer>
-            <button>Previous</button>
-
-            <button>Next</button>
+        <footer style={{display: 'flex', tableLayout: 'fixed', width: "100%", alignItems: 'center', justifyContent: 'center', marginTop: "4vh"}}>
+            {!(targetShowAmount == projectList.length) && 
+                <button className="showMoreButton clickable" style={{
+                    width: "auto", border: "none", backgroundColor: curColorScheme.secondary, color: curColorScheme.font, letterSpacing: "4px", fontWeight: "bolder",
+                    padding: "20px"
+                }} onClick={() => setTargetShowAmount(projectList.length)}>Show More</button>}
         </footer>
     </div>
 }
 
 
-const Tag = ({title, color, closable, onClose}:{title:string, color?:string, closable?:boolean, onClose?:()=>void}) => {
-    return <p>{title}{closable && <button onClick={onClose}>X</button>}</p>
+const ProjectItem = ({projectItem, animDelayStyle}:{projectItem:ProjectItemData, animDelayStyle:React.CSSProperties}) => {
+    const curColorScheme = React.useContext(ColorSchemeContext)
+
+    const imagePath:string = projectItem.imagePath;
+    const title:string = projectItem.title;
+    const description:string = projectItem.description;
+    const tags:string[] = projectItem.softwareUsed;
+    const link:string|undefined = projectItem.projectLink;
+
+    const projectItemStyle:React.CSSProperties = {
+        position:"relative", display: "flex", 
+        flexDirection: "column", alignItems: "start", 
+        width: "20%", margin: "10px", padding: "8px",
+        gap: "4px", ...animDelayStyle,
+        borderColor: curColorScheme.accent
+    }
+
+   return  <div className="project-card slide-in" style={projectItemStyle}>
+        <img style={{ alignSelf: 'center', width: "100%", height: "200px", objectFit: "cover"}} src={imagePath} alt="" />
+        {link ? 
+            <a className="clickable" style={{display: 'flex', gap: "10px", textDecoration: 'none', color: curColorScheme.primary}} href={link} target="_blank">
+                <h3 className="clickable">{title}</h3><span><MatIcon.ArrowRightAltRounded /></span>
+            </a> 
+            : <h3 style={{color: curColorScheme.primary}}>{title}</h3>
+        }
+        <p style={{fontSize: "15px", color: curColorScheme.secondary}}>{`${projectItem.startMonth} - ${projectItem.endMonth}`}</p>
+        <p style={{fontSize: "smaller"}}>{description}</p>
+        <div style={{display: "flex", gap: "4px"}}>{tags.map(tag => <Tag title={tag} />)}</div>
+    </div>
 }
 
-const ProjectItem = ({imagePath, title, description, tags}:{imagePath:string, title:string, description:string, tags:string[]}) => {
-    return  <div style={{width: "300px", height: "300px", margin: "10px"}}>
-        <img style={{width: "300px", height: "200px", objectFit: "cover"}} src={imagePath} alt="" />
-        <h3>{title}</h3>
-        <p>{description}</p>
-        <div style={{display: "flex"}}>{tags.map(tag => <Tag title={tag} />)}</div>
-    </div>
+export const Tag = ({title, color, closable, onClose}:{title:string, color?:string, closable?:boolean, onClose?:()=>void}) => {
+    const curColorScheme = React.useContext(ColorSchemeContext)
+
+    const tagStyle:React.CSSProperties = {
+        border: 'solid 1px',
+        borderColor: curColorScheme.accent,
+        color: curColorScheme.font,
+        backgroundColor: curColorScheme.secondary,
+        padding: "4px", 
+        borderRadius: "8px",
+        fontSize: '10px', 
+        fontWeight: "bolder"
+    }
+    return <p style={tagStyle}>{title}{closable && <button onClick={onClose}>X</button>}</p>
 }
