@@ -8,7 +8,7 @@ export const ContactMe = () => {
         , alignItems: 'center', justifyContent: "center", gap: "20px"}}>
         <p>Let me know if you have any questions or concerns!</p>
         <input type="submit" className="clickable" style={{
-                width: "auto", border: "none", backgroundColor: curColorScheme.secondary, color: curColorScheme.font, letterSpacing: "4px", fontWeight: "bolder",
+                width: "auto", border: "none", backgroundColor: curColorScheme.secondary, color: curColorScheme.background, letterSpacing: "4px", fontWeight: "bolder",
                 padding: "20px"
         }}
             value={"Email"}></input>

@@ -90,7 +90,7 @@ export const Projects = () => {
         <footer style={{display: 'flex', tableLayout: 'fixed', width: "100%", alignItems: 'center', justifyContent: 'center', marginTop: "4vh"}}>
             {!(targetShowAmount == projectList.length) && 
                 <button className="showMoreButton clickable" style={{
-                    width: "auto", border: "none", backgroundColor: curColorScheme.secondary, color: curColorScheme.font, letterSpacing: "4px", fontWeight: "bolder",
+                    width: "auto", border: "none", backgroundColor: curColorScheme.secondary, color: curColorScheme.background, letterSpacing: "4px", fontWeight: "bolder",
                     padding: "20px"
                 }} onClick={() => setTargetShowAmount(projectList.length)}>Show More</button>}
         </footer>
@@ -123,7 +123,7 @@ const ProjectItem = ({projectItem, animDelayStyle}:{projectItem:ProjectItemData,
             </a> 
             : <h3 style={{color: curColorScheme.primary}}>{title}</h3>
         }
-        <p style={{fontSize: "15px", color: curColorScheme.secondary}}>{`${projectItem.startMonth} - ${projectItem.endMonth}`}</p>
+        <p style={{fontSize: "15px", color: curColorScheme.accent, fontWeight: "500"}}>{`${projectItem.startMonth} - ${projectItem.endMonth}`}</p>
         <p style={{fontSize: "smaller"}}>{description}</p>
         <div style={{display: "flex", gap: "4px"}}>{tags.map(tag => <Tag title={tag} />)}</div>
     </div>
@@ -136,7 +136,7 @@ export const Tag = ({title, color, closable, onClose}:{title:string, color?:stri
         border: 'solid 1px',
         borderColor: curColorScheme.accent,
         color: curColorScheme.font,
-        backgroundColor: curColorScheme.secondary,
+        backgroundColor: curColorScheme.background,
         padding: "4px", 
         borderRadius: "8px",
         fontSize: '10px', 

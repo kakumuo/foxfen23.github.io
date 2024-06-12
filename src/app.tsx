@@ -34,25 +34,12 @@ type ColorScheme = {
 }
 
 const colorSchemes: ColorScheme[] = [
-    {primary: "#ffffff", secondary: "#ffe8d1", background: "#ffffff", font: "#568ea3", accent: "#68c3d4" },
-    {primary: "#fdf0d5", secondary: "#c6d8d3", background: "#fdf0d5", font: "#3a3335", accent: "#d81e5b" },
-    {primary: "#f1ffe7", secondary: "#44cf6c", background: "#f1ffe7", font: "#32a287", accent: "#6c464e" },
-    {primary: "#edf6f9", secondary: "#83c5be", background: "#edf6f9", font: "#006d77", accent: "#e29578" },
-    {primary: "#ffc4eb", secondary: "#ffe4fa", background: "#f1dedc", font: "#e1dabd", accent: "#abc798" },
-    {primary: "#ddd8b8", secondary: "#b3cbb9", background: "#ddd8b8", font: "#84a9c0", accent: "#6a66a3" },
-    {primary: "#d1faff", secondary: "#9bd1e5", background: "#d1faff", font: "#6a8eae", accent: "#57a773" },
-    {primary: "#d782ba", secondary: "#e18ad4", background: "#eeb1d5", font: "#efc7e5", accent: "#e0efda" },
-    {primary: "#d1ccdc", secondary: "#424c55", background: "#f5edf0", font: "#886f68", accent: "#3d2c2e" },
-    {primary: "#bce784", secondary: "#5dd39e", background: "#bce784", font: "#348aa7", accent: "#525174" },
-    {primary: "#8783d1", secondary: "#aa9aba", background: "#bfa4a4", font: "#d1abad", accent: "#e3b9bc" },
-    {primary: "#eca400", secondary: "#eaf8bf", background: "#eca400", font: "#006992", accent: "#27476e" },
-    {primary: "#582707", secondary: "#972d07", background: "#ff4b3e", font: "#ffb20f", accent: "#ffe548" },
-    {primary: "#524632", secondary: "#8f7e4f", background: "#c3c49e", font: "#d8ffdd", accent: "#dedbd8" },
-    {primary: "#4e3d42", secondary: "#6d6466", background: "#9f9f92", font: "#c9d5b5", accent: "#e3dbdb" },
-    {primary: "#1b1b3a", secondary: "#693668", background: "#a74482", font: "#f84aa7", accent: "#ff3562" },
-    {primary: "#0a2342", secondary: "#2ca58d", background: "#84bc9c", font: "#fffdf7", accent: "#f46197" },
-    {primary: "#6a0136", secondary: "#bfab25", background: "#b81365", font: "#026c7c", accent: "#055864" },
-    {primary: "#020202", secondary: "#503b31", background: "#705d56", font: "#9097c0", accent: "#a7bbec" }
+    {primary: "#8FB339", secondary: "#536231", background: "#0F1A20", font: "#DADDD8", accent: "#B7CE63" },
+    {primary: "#88A2AA", secondary: "#E2856E", background: "#0F1A20", font: "#ADA296", accent: "#F42C04" },
+    {primary: "#F42C04", secondary: "#F42C04", background: "#88A2AA", font: "#0F1A20", accent: "#E2856E" },
+    {primary: "#D10000", secondary: "#7C0B2B", background: "#FFCBDD", font: "#0F1A20", accent: "#FB4B4E" },
+    {primary: "#150578", secondary: "#449DD1", background: "#78C0E0", font: "#0E0E52", accent: "#3943B7" },
+    {primary: "#F1DABF", secondary: "#92817A", background: "#FFFBFF", font: "#000500", accent: "#362417" },
   ];
 
 const dayString = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -190,20 +177,23 @@ export const App = () => {
     const outerStyle:React.CSSProperties = {
         width: outerWidth, height: outerWidth,
         border: `solid 1px`, 
-        borderColor: curColorScheme.font,
+        borderColor: curColorScheme.accent,
         borderRadius: "50%",
         display: 'block',
         position: "absolute", 
         alignItems: 'center', 
         justifyContent: 'center', 
         zIndex: "1000", 
+        filter: 'invert(1)',
         pointerEvents: 'none', 
         transition: 'border-color .2s ease-in-out, background-color .2s ease-in-out'
     }
 
     const innerStyle:React.CSSProperties = {
         width: innerWidth, height: innerWidth, 
-        backgroundColor: curColorScheme.primary,
+        backgroundColor: curColorScheme.accent,
+        filter: 'invert(1)',
+        border: "100px",
         borderRadius: "50%",
         position: "absolute",
         zIndex: "1000", 
@@ -233,14 +223,13 @@ export const App = () => {
                 )}
             </div>
             <div className="slide-up" style={{display: "flex", flexDirection: "column", alignItems: "center", gap: "10px"}}>
-                <p className="slide-up" style={{alignItems: 'center', display: 'grid', gridTemplateColumns: "auto auto", gap: '4px'}} >
+                <p className="slide-up" style={{alignItems: 'center', display: 'grid', gridTemplateColumns: "auto auto", color: curColorScheme.background, gap: '4px'}} >
                     <MatIcons.LightMode /> Light</p>
-                <input  className="slide-up" type="range" min={0} max={colorSchemes.length-1}
-                    style={{writingMode: "vertical-lr", direction: "rtl", verticalAlign: "middle"
+                <input  className="slide-up" type="range" min={0} max={colorSchemes.length-1} value={targetScheme} style={{writingMode: "vertical-lr", direction: "rtl", verticalAlign: "middle"
                         ,   background: "linear-gradient(to right, #82CFD0 0%, #82CFD0 50%, #fff 50%, #fff 100%)"
                         , color: curColorScheme.font}} 
                     onChange={ev => handleColorSchemeUpdate(ev.target.value)} />
-                <p className="slide-up" style={{alignItems: 'center', display: 'grid', gridTemplateColumns: "auto auto", gap: '4px'}} >
+                <p className="slide-up" style={{alignItems: 'center', display: 'grid', gridTemplateColumns: "auto auto", gap: '4px', color: curColorScheme.background}} >
                      <MatIcons.DarkMode /> Dark</p>
             </div>
             <div style={{position: 'relative', display: "flex", alignItems: "center", justifyContent: "space-evenly"}}>
@@ -288,7 +277,7 @@ const SidebarButton = ({contentData, animationStyle, isSelected=false, onClick}:
         borderColor: "black",
         textDecoration: 'none',
         backgroundColor: "#00000000",
-        color: curColorScheme.font,
+        color: curColorScheme.background,
         fontWeight: "1000",
         fontSize: "15px",
         letterSpacing: "2px",
