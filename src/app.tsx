@@ -23,6 +23,7 @@ const contentList:ContentPaneType[] = [
     {
         title: "Contact Me", ref: 'contact-me', page: <ContactMe />
     }
+    
 ]
 
 type ColorScheme = {
@@ -40,7 +41,7 @@ const colorSchemes: ColorScheme[] = [
     {primary: "#D10000", secondary: "#7C0B2B", background: "#FFCBDD", font: "#0F1A20", accent: "#FB4B4E" },
     {primary: "#150578", secondary: "#449DD1", background: "#78C0E0", font: "#0E0E52", accent: "#3943B7" },
     {primary: "#F1DABF", secondary: "#92817A", background: "#FFFBFF", font: "#000500", accent: "#362417" },
-  ];
+];
 
 const dayString = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 const monthString = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
