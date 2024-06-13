@@ -2,6 +2,7 @@ import React from "react"
 import {Tag} from './Projects'
 import { ColorSchemeContext } from "../app"
 import { Important } from "./Home"
+import '../styles.css'
 
 type AboutItem = {
     title:string, 
@@ -29,7 +30,7 @@ const aboutItemList:AboutItem[] = [
             Aided knowledge transfer and ETL/JBoss Fuse process development. Deployed ETL pushing around <Important> 80m UPS.com contacts </Important> to Salesforce whilst deduplicating. 
             Additionally, I assisted JBoss Fuse upgrade and maintenance projects like <Important> database failovers </Important>.
         </>,
-        imagePath: "/resources/ups.png", 
+        imagePath: "./resources/ups.png", 
         tags: ['GIT', 'Jenkins', 'SSIS', 'MSSQL', 'Management Training', 'Linux', 'Java', 'Salesforce', 'Marketo']
     },
     {
@@ -44,7 +45,7 @@ const aboutItemList:AboutItem[] = [
             Exploring the Mulesoft Anypoint Platform, I created Mule ESB proof of concepts while fortifying Linux servers with <Important> renewed certificates </Important> and <Important> encryption </Important>.
             Embracing Agile rhythms through sprint/retrospective training, I optimized software delivery with <Important> Jenkins </Important> pipelines for <Important> TFS/Nexus </Important> deployments.
         </>,
-        imagePath: "/resources/ups.png", 
+        imagePath: "./resources/ups.png", 
         tags: ['GIT', 'Jenkins', 'MSSQL', 'Salesforce', 'Mulesoft', 'Linux', 'Java', 'Agile/Scrum', 'Marketo', 'SSIS', 'TFS']
     },
      {
@@ -62,7 +63,7 @@ const aboutItemList:AboutItem[] = [
             a 2019 Hackathon and presented my 2019 UPS Hackathon and Internship project to 
             the then CI/EO, <Important>Juan Perez</Important>.
         </>,
-        imagePath: "/resources/ups_intern.jpg", 
+        imagePath: "./resources/ups_intern.jpg", 
         tags: ["MSSQL", "Java", "Marketo"]
     }, 
     {
@@ -83,7 +84,7 @@ const aboutItemList:AboutItem[] = [
             assignment accuracy and giving feedback on <Important> code quality </Important> 
             and <Important> completeness </Important>.
         </>,
-        imagePath: "/resources/classroom.jpg", 
+        imagePath: "./resources/classroom.jpg", 
         tags: ["Java"]
     }, 
     {
@@ -103,7 +104,7 @@ const aboutItemList:AboutItem[] = [
             <Important> Intensive Programming in Linux </Important>
             and <Important> Introduction to Artificial Intelligence </Important>.
         </>,
-        imagePath: "/resources/njit.jpg", 
+        imagePath: "./resources/njit.jpg", 
         tags: ["Java", "C++", "Linux", "Bash", "Python"]
     }
 ]

@@ -20,7 +20,7 @@ type ProjectItemData = {
 const projectList:ProjectItemData[] = [
     {
         title: "Ludo Card Game",
-        imagePath: "/resources/ludo.webp",
+        imagePath: "./resources/ludo.webp",
         description: "Created a board game in Godot with gameplay elements from Ludo and traditional deck building games.",
         softwareUsed: ["Godot", "GodotScript"],
         startMonth: "Sept 2023", 
@@ -28,7 +28,7 @@ const projectList:ProjectItemData[] = [
     }, 
     {
         title: "Smart Home Web Server",
-        imagePath: "/resources/smarthome.jpg",
+        imagePath: "./resources/smarthome.jpg",
         description: "Created a web server application for managing multiple smart home bulbs and motion sensors. Realtime data of motion sensors is collected through RocketMQ.",
         softwareUsed: ["Python", "RocketMQ", "Javascript", "HTML", "CSS"], 
         startMonth: "Oct 2022", 
@@ -36,7 +36,7 @@ const projectList:ProjectItemData[] = [
     }, 
     {
         title: "Smart Lighting Client",
-        imagePath: "/resources/smartlighting.webp",
+        imagePath: "./resources/smartlighting.webp",
         description: "Developed a desktop client through Java to connect to smart bulbs and light strips. Application allows for color customization and lighting synchronization to videos.",
         softwareUsed: ["Java"], 
         startMonth: "Nov 2020", 
@@ -44,7 +44,7 @@ const projectList:ProjectItemData[] = [
     }, 
     {
         title: "Transportation Modelling",
-        imagePath: "/resources/transportationmodelling.jpg",
+        imagePath: "./resources/transportationmodelling.jpg",
         description: "Assisted in creating an analytics platform for the KPF Architecture Firm to ingest ArcGIS data and generate metrics related to walkability, sunlight, foot traffic etc.",
         softwareUsed: ["Rhino", "Python"], 
         startMonth: "Jan 2019", 
@@ -52,7 +52,7 @@ const projectList:ProjectItemData[] = [
     }, 
     {
         title: "Linux Terminal Through",
-        imagePath: "/resources/linux.jpg",
+        imagePath: "./resources/linux.jpg",
         description: "Created a C program to mimic a Linux terminal, making use of the Cygwin library for command execution and Posix library for parallel processing.",
         softwareUsed: ["C", "Linux"], 
         startMonth: "Jan 2019", 
@@ -60,7 +60,7 @@ const projectList:ProjectItemData[] = [
     }, 
     {
         title: "Pong with Machine Learning",
-        imagePath: "/resources/pong.png",
+        imagePath: "./resources/pong.png",
         description: "Used Unity’s ML agents library to create an AI opponent for a pong-like microgame.",
         softwareUsed: ["Unity", "Unity ML Agents"], 
         startMonth: "Dec 2019", 
@@ -68,7 +68,7 @@ const projectList:ProjectItemData[] = [
     }, 
     {
         title: "Color Palette Generator",
-        imagePath: "/resources/colorpalette.jpg",
+        imagePath: "./resources/colorpalette.jpg",
         description: "Used k-means clustering techniques to identify a color palette from a photograph.",
         softwareUsed: ["Python"], 
         startMonth: "June 2018", 

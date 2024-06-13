@@ -216,7 +216,7 @@ export const App = () => {
             <div id="profileImgGroup" className="slide-up" style={{display: 'flex', flexDirection: "column", alignItems: "center", color: curColorScheme.accent}}>
                 <div style={{textAlign: "center", fontWeight: "bolder", marginBottom: "8px"}}><p>{curTime[0]}</p><p>{curTime[1]}</p></div>
                 <h3>Kevin Akumuo</h3>
-                <img src="/resources/profile_kevin.jpg" style={{width: "100px", height: "100px", objectFit: "cover", alignSelf: "center", marginTop: "1vh"}}/>
+                <img src="./resources/profile_kevin.jpg" style={{width: "100px", height: "100px", objectFit: "cover", alignSelf: "center", marginTop: "1vh"}}/>
             </div>
             <div className="slide-up" style={{display: 'grid', gridTemplateRows: contentList.map(_ => "auto").join(" "), gap: "10px", marginRight: "auto", marginLeft: "auto", width: "80%"}}>
                 {contentList.map((item, itemI) => 
@@ -299,7 +299,7 @@ const SidebarButton = ({contentData, animationStyle, isSelected=false, onClick}:
         <a className={`navBtn ${isSelected ? 'navBtn-selected' : targetClass}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
         style={{display: "flex", position: "relative", ...animationStyle, textDecorationLine: "none", color: curColorScheme.accent}} 
         onClick={(ev) => onClick(ev)} 
-        href={`page.html#${contentData.ref}`}>
+        href={`index.html#${contentData.ref}`}>
             <div className=""/>
             <button className="slide-up clickable" style={{...sidebarButtonStyle}}>{contentData.title}</button>
         </a>
