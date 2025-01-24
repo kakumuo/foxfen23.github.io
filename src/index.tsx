@@ -12,6 +12,6 @@ document.documentElement.onscroll = (ev) => {
 
 root.render(
   <React.StrictMode>
-    <App/>
+    <App />
   </React.StrictMode>
 ); 

@@ -1,7 +1,0 @@
-- ~~contact me page~~
-- ~~circle mouse cursor~~
-- fill with details
-- ~~highlight nav buttons when scrolling~~
-- ~~smooth scrolling through page~~
-- ~~color theme change~~
-- reveal on scroll
