@@ -46,6 +46,7 @@
     padding-bottom: 4px;
     z-index: 2;
     text-decoration: none;
+    cursor: pointer;
     color: var(--clr-font-pri);
 
     div {
@@ -116,7 +117,6 @@
     grid-template-rows: auto;
     gap: 8px;
     padding-top: 10%;
-    min-height: 80vh;
 
     img {
         height: 300px;
@@ -130,6 +130,8 @@
     width: auto; height: auto;
     border-radius: 4px;
     padding: 4px;
+
+    font-size: small;
 }
 
 .tag-list {
@@ -137,6 +139,7 @@
     grid-template-columns: repeat(auto-fill, auto);
     grid-template-rows: auto;
 }
+
 
 .card-list {
     display: grid;
@@ -226,8 +229,99 @@
 }
 
 .page-section {
-    margin-top: 10vh;
+    margin-top: 20vh;
+
+    .section-goto {
+        display: flex;
+
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+
+        span {
+            transition: var(--anim-trans);
+        }
+        transition: var(--anim-trans);
+    }
+
+    .section-goto:hover span {
+        transform: translate(8px, 0);
+        transition: var(--anim-trans);
+    }
 }
+
+.look-at {
+    position: relative;
+    font-weight: bolder;
+    color: orange;
+    text-decoration: none;
+
+    caption {
+        position: fixed;
+        pointer-events: none;
+        background-color: white;
+        border: solid black;
+        transition: var(--anim-trans);
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+}
+
+.dropdown {
+    position: relative;
+
+    .dropdown-target {
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        transform: translateX(-80%);
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: repeat(auto-fill, auto);
+        background-color: white;
+    }
+}
+
+
+.color-picker-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  
+    p {
+      margin: 0;
+      padding-right: 10px;
+    }
+  
+    .color-list {
+      display: flex;
+      align-items: center;
+  
+      .color-display {
+        width: 20px;
+        height: 20px;
+        border-radius: 8px;
+        margin-right: 5px;
+        border: 1px solid #ccc;
+  
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  
 
 /* PROJECTS */
 
@@ -260,10 +354,6 @@
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: repeat(auto-fill, auto);
-
-    #show-resume {
-        text-align: end;
-    }
 }
 
 #experience-list {
