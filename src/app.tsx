@@ -150,9 +150,10 @@ export const App = () => {
             />)}
 
             {sideNavOptions.map((nav, navI) =>  
-                <SocialLink icon={nav.icon} label={nav.label} link={nav.link} key={navI} />
+                <LookAt caption={nav.label} link={nav.link} key={navI}> {nav.icon}</LookAt>
             )}
             <Dropdown onFocusLost={() => handleSchemeFocusLost()} target={<MUIcons.ColorLens
+                className='look-at'
                 style={{color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].toString()}}
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}

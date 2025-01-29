@@ -261,6 +261,10 @@
     text-decoration: none;
     transition: var(--anim-trans);
 
+    a {
+        transition: var(--anim-trans);
+    }
+
     .caption {
         position: fixed;
         pointer-events: none;

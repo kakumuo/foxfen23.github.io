@@ -9,6 +9,7 @@ A basic portfolio site
 # TODO
 ### Fixes
 - section not underlining after changing theme once
+- lookat caption leading of top of page
 ### Future
 ### Brainstorming
 - light and dark theme w/ physics based light switch cord

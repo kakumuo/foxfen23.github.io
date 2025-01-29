@@ -139,10 +139,9 @@ export const LookAt = ({caption, link, children}:{caption?:string, link?:string,
     }, [])
 
     return <span className='look-at'  
-        style={{color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].toString()}}
         onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}
     >
-        <a href={link}>{children}</a>
+        <a style={{color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].toString()}} href={link}>{children}</a>
         {caption && 
         <caption 
             style={{
