@@ -8,7 +8,9 @@ A basic portfolio site
 
 # TODO
 ### Fixes
+- section not underlining after changing theme once
 ### Future
 ### Brainstorming
+- light and dark theme w/ physics based light switch cord
 - List projects from github, pull through API
 - List resume from google docs, pull through API

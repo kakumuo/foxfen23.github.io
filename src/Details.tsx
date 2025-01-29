@@ -107,29 +107,74 @@ export type ColorScheme =  {
   fontPrimary: Color, 
   fontAccent: Color
 }
-
 class Color {
-  hex:string = "";
-  constructor(hex:string) {
-      if(hex.length == 7){
-          hex = hex.substring(1, 7)
-      }
+  hex: string = "";
+  r: number = 0;
+  g: number = 0;
+  b: number = 0;
+  a: number = 1;
 
-      this.hex = hex; 
+  constructor(hex: string) {
+    if (hex.startsWith("#")) {
+      hex = hex.substring(1);
+    }
+
+    if (hex.length === 6) {
+      this.hex = hex;
+      this.hexToRGB();
+    } else {
+      throw new Error("Invalid hex color format. Must be #RRGGBB or RRGGBB.");
+    }
   }
 
-  grade(val:number):Color{
-      
-      return new Color(""); 
+  private hexToRGB() {
+    // Convert the hex string to RGB values
+    this.r = parseInt(this.hex.substring(0, 2), 16);
+    this.g = parseInt(this.hex.substring(2, 4), 16);
+    this.b = parseInt(this.hex.substring(4, 6), 16);
   }
 
-  trans(val:number):Color{
-      
-      return new Color(""); 
+  grade(val: number): Color {
+    // Calculate perceived brightness
+    const brightness = (this.r * 299 + this.g * 587 + this.b * 114) / 1000;
+    
+    // Determine if the color is light (brightness > 128)
+    const isLight = brightness > 128;
+    
+    // Adjust brightness by scaling RGB values
+    const adjust = (channel: number) => {
+      const adjustment = isLight ? -val : val;
+      return Math.min(255, Math.max(0, channel + adjustment));
+    };
+    
+    const newR = adjust(this.r);
+    const newG = adjust(this.g);
+    const newB = adjust(this.b);
+  
+    // Convert back to hex
+    const toHex = (channel: number) =>
+      channel.toString(16).padStart(2, "0");
+  
+    const newHex = `#${toHex(newR)}${toHex(newG)}${toHex(newB)}`;
+    return new Color(newHex);
+  }
+  
+
+  trans(val: number): Color {
+    // Adjust transparency (alpha value)
+    const newAlpha = Math.min(1, Math.max(0, val));
+    const newColor = new Color(this.hex);
+    newColor.a = newAlpha;
+    return newColor;
   }
 
-  toString():string {
-      return "#" + this.hex; 
+  toString(): string {
+    // Format as "rgb(r, g, b)" or "rgba(r, g, b, a)"
+    if (this.a === 1) {
+      return `rgb(${this.r}, ${this.g}, ${this.b})`;
+    } else {
+      return `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a.toFixed(2)})`;
+    }
   }
 }
 
@@ -167,8 +212,8 @@ export const sampleColorSchemes: ColorScheme[] = [
     primary: new Color("#ffffff"),
     secondary: new Color("#f1f1f1"),
     accent: new Color("#333333"),
-    fontPrimary: new Color("#333333"),
-    fontAccent: new Color("#ffffff")
+    fontPrimary: new Color("#777777"),
+    fontAccent: new Color("#111122")
   },
   {
     label: "Neon Nights",

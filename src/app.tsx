@@ -1,11 +1,8 @@
 import React from 'react'
 import * as MUIcons from '@mui/icons-material'
 import './style.css'
-import { CardData, CardList, ColorPickerListItem, Dropdown, LookAt, NavLink, PageSection } from './Components'
-import { experienceData, ExperienceDetails, projectData, sampleColorSchemes } from './Details'
-
-
-
+import { CardData, CardList, ColorPickerListItem, Dropdown, LookAt, NavLink, PageSection, SocialLink } from './Components'
+import { ColorScheme, experienceData, ExperienceDetails, projectData, sampleColorSchemes } from './Details'
 
 const sideNavOptions:{label:string, icon:React.JSX.Element, link:string}[] = [
     {label: "Contact Me", icon: <MUIcons.Mail />, link: 'mailto:akumuok@gmail.com'}, 
@@ -41,6 +38,8 @@ const getStartEndDate = (exp:ExperienceDetails):string => {
     return `${startStr} - ${endStr}`
 }
 
+export const AppContext = React.createContext<ColorScheme>(sampleColorSchemes[0]); 
+
 export const App = () => {
     const [curSection, setCurSection] = React.useState(0); 
     const [curNav, setCurNav] = React.useState(0); 
@@ -48,6 +47,11 @@ export const App = () => {
         React.createRef<HTMLDivElement>(),React.createRef<HTMLDivElement>(),React.createRef<HTMLDivElement>()
     ]
 
+    // Color scheme properties
+    const [hoverSchemeI, setHoverSchemeI] = React.useState(-1); 
+    const [targetSchemeI, setTargetSchemeI] = React.useState(0); 
+    const [clrScheme, setTargetScheme] = React.useState(sampleColorSchemes[targetSchemeI]); 
+    
     const [projectCardData, setProjectCardData] = React.useState(projectData.map(p => {
         return {
           aside: {type: 'img', val: p.thumbnail}, 
@@ -76,13 +80,23 @@ export const App = () => {
         }
     }
 
+    // COLOR SCHEME BEHAVIOR
     const handleSchemeHover = (val:number) => {
-
+        setHoverSchemeI(val); 
     }
 
     const handleSchemeClick = (val:number) => {
-
+        setHoverSchemeI(-1); 
+        setTargetSchemeI(val); 
     }
+
+    const handleSchemeFocusLost = () => {
+        setHoverSchemeI(-1); 
+    }
+
+    React.useEffect(() => {
+        setTargetScheme(sampleColorSchemes[hoverSchemeI != -1 ? hoverSchemeI : targetSchemeI]); 
+    }, [hoverSchemeI, targetSchemeI])
 
     // SCROLL BEHAVIOR
     React.useEffect(() => {
@@ -121,21 +135,28 @@ export const App = () => {
             document.removeEventListener('scroll', onScroll); 
         }
     }, [curNav])
+    
+    // for color picker mouse hover
+    const [isHover, setIsHover] = React.useState(false); 
 
-    return <div id='app-content'>
-        <header id='header-nav'>
+    return <AppContext.Provider value={clrScheme}>
+
+    <div id='app-content' style={{backgroundColor: clrScheme.primary.toString(), color: clrScheme.fontPrimary.toString()}}>
+        <header id='header-nav' style={{backgroundColor: clrScheme.primary.toString(), color: clrScheme.fontPrimary.toString()}}>
             {topNavOptions.map((nav, navI) => <NavLink 
                 onClick={() => handleNavClick(navI)}
                 link={nav.link} label={`0${nav.number + 1}. ${nav.label}`} key={navI} 
                 isSelected={curNav == nav.number}
             />)}
 
-            {sideNavOptions.map((nav, navI) => <a 
-                className='other-link' key={navI} children={nav.icon} 
-                title={nav.label}
-                href={nav.link}
-            />)}
-            <Dropdown target={<MUIcons.ColorLens />} >
+            {sideNavOptions.map((nav, navI) =>  
+                <SocialLink icon={nav.icon} label={nav.label} link={nav.link} key={navI} />
+            )}
+            <Dropdown onFocusLost={() => handleSchemeFocusLost()} target={<MUIcons.ColorLens
+                style={{color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].toString()}}
+                onMouseEnter={() => setIsHover(true)}
+                onMouseLeave={() => setIsHover(false)}
+            />} >
                 {sampleColorSchemes.map((scheme, schemeI) => (
                     <ColorPickerListItem key={scheme.label} scheme={scheme} optionVal={schemeI}
                     onClick={(v) => handleSchemeHover(v)} onHover={(v) => handleSchemeClick(v)} />
@@ -147,33 +168,25 @@ export const App = () => {
             <PageSection pageRef={navRefs[0]} id='about-section'>
                 <img src='/resources/profile_kevin.jpg' />
                 <div>
-                    <h3>Backend Developer</h3>
+                    <h3 style={{color: clrScheme.fontAccent.toString()}}>Backend Developer</h3>
                     <h1>Kevin Akumuo</h1>
-                    <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h6>
+                    <h6 style={{color: clrScheme.fontAccent.toString()}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h6>
 
                     <p>Lorem ipsum dolor sit amet <LookAt caption='Some caption that should go here'>consectetur adipisicing elit. Ipsam, ab in. Nihil sit repellat</LookAt> impedit voluptates, porro cupiditate provident fuga sequi accusamus, deleniti, dignissimos ipsum itaque saepe quas recusandae perferendis modi! Recusandae magni et, sequi magnam repellendus ducimus quo reiciendis minus possimus minima odio? Eum sed id aut unde quibusdam sit? Recusandae possimus inventore, nihil qui maxime accusantium fuga. Quibusdam qui nobis repellendus optio assumenda! Dicta cumque sunt nesciunt asperiores praesentium ullam error debitis provident est reiciendis commodi nobis ipsam repellat ipsa odit repellendus iusto a vero perferendis sapiente, consequuntur magnam saepe minima quae. Rem pariatur maiores assumenda ab alias!</p>
                 </div>
             </PageSection>
 
-            <PageSection pageRef={navRefs[1]} id='projects-section'>
+            <PageSection pageRef={navRefs[1]} id='projects-section' gotoLabel='More Projects' link=''>
                 <CardList data={projectCardData} />
-                
-                <div className='section-goto'>
-                    <p>More Projects</p>
-                    <span children={<MUIcons.ArrowForward />} />
-                </div>
             </PageSection>
 
-            <PageSection pageRef={navRefs[2]} id='experience-section'>
+            <PageSection pageRef={navRefs[2]} id='experience-section' gotoLabel='Show Resume' link=''>
                 <CardList data={cardData} />
-                <div className='section-goto'>
-                    <p>Show Resume</p>
-                    <span children={<MUIcons.ArrowForward />} />
-                </div>
-                
             </PageSection>
         </main>
     </div>
+
+    </AppContext.Provider>
 }
 
 
