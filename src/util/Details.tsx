@@ -1,5 +1,5 @@
 
-type ProjectDetails = {
+export type ProjectDetails = {
     title:string, 
     desc:string, 
     link:string, 
@@ -101,11 +101,12 @@ export const experienceData: ExperienceDetails[] = [
 export type ColorScheme =  {
   label:string, 
   labelFont:string, 
-  primary:Color, 
-  secondary: Color, 
-  accent: Color, 
-  fontPrimary: Color, 
-  fontAccent: Color
+  
+  primary:Color, // any color
+  secondary: Color, // bit lighter than primary, unless white, then a bit darker
+  accent: Color, // primary compliment, visible over primary
+  fontPrimary: Color, // negation of primary
+  fontAccent: Color // fontPrimary compliment
 }
 class Color {
   hex: string = "";

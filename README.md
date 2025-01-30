@@ -8,9 +8,12 @@ A basic portfolio site
 
 # TODO
 ### Fixes
-- section not underlining after changing theme once
-- lookat caption leading of top of page
+- ~~section not underlining after changing theme once~~ [use 'useRef' instead of 'createRef', resets on repaint]
+- ~~look at caption leading of top of page~~ [negate y pos when out of bounds]
 ### Future
+- reactive
+- fill with data
+- configure colors
 ### Brainstorming
 - light and dark theme w/ physics based light switch cord
 - List projects from github, pull through API

@@ -1,37 +1,48 @@
 import React from 'react'
 import { ArrowOutward, ScreenshotMonitor } from '@mui/icons-material'
-import './style.css'
-import { ColorScheme } from './Details'
-import {AppContext} from './app'
+import '../style.css'
+import { ColorScheme, sampleColorSchemes } from './Details'
+import {AppContext} from '../app'
 import * as MUIcons from '@mui/icons-material'
+import { Link } from 'react-router'
 
 
-const CardItem = ({aside, title, desc, taglist, link}:{aside:React.JSX.Element, title:string, desc:string, taglist:string[], link:string}) => {
-    const clrScheme = React.useContext<ColorScheme>(AppContext)
+const GREY_OUT = .5
+export const Tag = ({label, style}:{label:string, style?:React.CSSProperties}) => {
+    return <p style={style} className="tag" >{label}</p>
+}
+
+const CardItem = ({greyOut, aside, title, desc, taglist, link}:{aside:{type:'text'|'img', val:string}, greyOut:boolean, title:string, desc:string, taglist:string[], link:string}) => {
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
     const [isHover, setIsHover] = React.useState(false);  
-    
-    return<a className='card' style={{
-            color: clrScheme.fontPrimary.toString(), 
+
+    return <a className='card' style={{
+            color: clrScheme.fontPrimary.trans(isHover ? 1 : greyOut ? GREY_OUT : 1).toString(), 
             borderColor: clrScheme[!isHover ? 'primary' : 'secondary'].toString()
         }}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
+        href={link}
     >
-        {aside}
+        {aside.type == 'img' ?
+             <img style={{opacity: isHover ? 1 : greyOut ? GREY_OUT : 1 }} className='card-aside-img' src={aside.val} /> 
+             : <p  style={{color: clrScheme.fontAccent.trans(isHover ? 1 : greyOut ? GREY_OUT : 1).toString()}}  className='card-aside-text'>{aside.val}</p>
+        }
         <div>
-            <div className='title-group' style={{color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].toString()}}>
+            <div className='title-group' style={{color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].trans(isHover ? 1 : greyOut ? GREY_OUT : 1).toString()}}>
                 <h1>{title}</h1>
                 <ArrowOutward className='link-arrow' />
             </div>
             <p>{desc}</p>
-            <div className="tag-list">{taglist.map((tag, tagI) => 
-                <p 
+            <div className="tag-list">{taglist.map((tag, tagI) =>
+                <Tag 
                     style={{
                         backgroundColor: clrScheme.fontAccent.trans(.3).toString(),
-                        color: clrScheme.fontAccent.toString()
+                        color: clrScheme.fontAccent.trans(isHover ? 1 : greyOut ? GREY_OUT : 1).toString()
                     }} 
-                    className="tag" key={tagI}
-                >{tag}</p>
+                    key={tagI}
+                    label={tag}
+                /> 
             )}</div>
         </div>
     </a>
@@ -46,10 +57,16 @@ export type CardData = {
 }
 
 export const CardList = ({data}:{data:CardData[]}) => {
-    return <div className='card-list'>
+    const [hover, setHover] = React.useState(false); 
+
+    return <div className='card-list'
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+    >
         {data.map((data, dataI) => (
             <CardItem key={dataI}
-                aside={data.aside.type == 'img' ? <img className='card-aside-img' src={data.aside.val} /> : <p className='card-aside-text'>{data.aside.val}</p>}
+                greyOut={hover}
+                aside={data.aside}
                 title={data.title}
                 desc={data.desc}
                 link={data.link}
@@ -60,7 +77,7 @@ export const CardList = ({data}:{data:CardData[]}) => {
 }
 
 export const PageSection = ({id, pageRef, gotoLabel=undefined, link, children}:{children:any, id:string, gotoLabel?:string, link?:string, pageRef:React.Ref<any>}) => {
-    const clrScheme = React.useContext<ColorScheme>(AppContext)
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
     const [isHover, setIsHover] = React.useState(false);  
     
     return <section className='page-section'
@@ -69,23 +86,24 @@ export const PageSection = ({id, pageRef, gotoLabel=undefined, link, children}:{
     {children} 
 
     {gotoLabel && 
-        <div className='section-goto'
+        <Link className='section-goto'
             style={{
                 color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].toString(), 
             }}
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
+            to={link ? link : ''}
         >
             <p>{gotoLabel}</p>
             <span children={<MUIcons.ArrowForward />} />
-        </div>
+        </Link>
     }
     </section>
 }
 
 
 export const NavLink = ({onClick, link, label, isSelected}:{link:string, label:string, isSelected:boolean, onClick:()=>void}) => {
-    const clrScheme = React.useContext<ColorScheme>(AppContext)
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
     const [isHover, setIsHover] = React.useState(false); 
 
     return <a  onClick={onClick} 
@@ -98,7 +116,7 @@ export const NavLink = ({onClick, link, label, isSelected}:{link:string, label:s
 }
 
 export const SocialLink = ({icon, label, link}:{icon:React.JSX.Element, label:string, link:string}) => {
-    const clrScheme = React.useContext<ColorScheme>(AppContext)
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
     const [isHover, setIsHover] = React.useState(false); 
 
     return <a 
@@ -113,51 +131,91 @@ export const SocialLink = ({icon, label, link}:{icon:React.JSX.Element, label:st
 
 export const LookAt = ({caption, link, children}:{caption?:string, link?:string, children:any}) => {
     const captionRef = React.useRef<HTMLDivElement>(null); 
-    const [pos, setPos] = React.useState({x:"0", y:"0"})
-    const OFFSET = {x: "10px", y:"(-8%)"}
+    const [pos, setPos] = React.useState({x:0, y:0});
+    const [hoverTimeout, setHoverTimeout] = React.useState(setTimeout(()=>{}, 1))
+    const HOVER_TIME = 1000 * .2
+    const OFFSET = {x: 20, y: 20}; // Changed to numbers for easier calculations
 
-    const clrScheme = React.useContext<ColorScheme>(AppContext)
-    const [isHover, setIsHover] = React.useState(false); 
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI];
+    const [isHover, setIsHover] = React.useState({val: false})
+    const [show, setShow] = React.useState(false); 
 
-    const handleMouseEnter = React.useCallback((ev:React.MouseEvent) => {
-        if(!captionRef.current) return; 
-        if(captionRef.current.classList.contains('hidden')) captionRef.current.classList.remove('hidden')
+    const handleMouseEnter = (ev:React.MouseEvent) => { 
+        setIsHover({val: true})       
+        updateCaptionPosition(ev.clientX, ev.clientY);
         
-        setIsHover(true)
-        setPos({ x: `${ev.clientX}px + ${OFFSET.x}`, y: `${ev.clientY}px + ${OFFSET.y}` });      
-    }, [])
+        clearTimeout(hoverTimeout)            
+        setHoverTimeout(setTimeout(() => {
+            if(!isHover.val)
+                setShow(true)
+        }, HOVER_TIME))
 
-    const handleMouseLeave = React.useCallback(() => {
-        if(!captionRef.current) return; 
+    }
 
-        setIsHover(false)
-        if(!captionRef.current.classList.contains('hidden')) captionRef.current.classList.add('hidden')
-    }, [])
+    const handleMouseLeave = () => {
+        clearTimeout(hoverTimeout)   
+        setShow(false);
+        setIsHover({val: false})
+    }
 
-    const handleMouseMove = React.useCallback((ev:React.MouseEvent) => {
-        setPos({ x: `${ev.clientX}px + ${OFFSET.x}`, y: `${ev.clientY}px + ${OFFSET.y}` });
-    }, [])
+    const handleMouseMove = (ev:React.MouseEvent) => {        
+        updateCaptionPosition(ev.clientX, ev.clientY);
+    }
 
-    return <span className='look-at'  
-        onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}
-    >
-        <a style={{color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].toString()}} href={link}>{children}</a>
-        {caption && 
-        <caption 
-            style={{
-                top: `calc(${pos.y})`, left: `calc(${pos.x})`,
-                backgroundColor: clrScheme.accent.grade(50).toString(),
-                borderColor: clrScheme.accent.toString(), 
-                color: clrScheme.fontPrimary.toString()
-            }} 
-            ref={captionRef} className='hidden caption'
-        >{caption}</caption>
+    const updateCaptionPosition = (mouseX: number, mouseY: number) => {
+        if (!captionRef.current) return;
+
+        const captionWidth = captionRef.current.offsetWidth;
+        const captionHeight = captionRef.current.offsetHeight;
+
+        // Calculate new positions
+        let newX = mouseX + OFFSET.x;
+        let newY = mouseY + OFFSET.y;
+
+        // Check boundaries
+        if (newX + captionWidth > window.innerWidth) {
+            newX = window.innerWidth - captionWidth - 10; // 10px padding from right
         }
-    </span>
-}
+        if (newY + captionHeight > window.innerHeight) {
+            newY = window.innerHeight - captionHeight - 10; // 10px padding from bottom
+        }
+
+        setPos({ x: newX, y: newY });
+    };
+
+    return (
+        <span className='look-at'  
+            onMouseEnter={handleMouseEnter} 
+            onMouseLeave={handleMouseLeave} 
+            onMouseMove={handleMouseMove}
+        >
+            <a style={{color: clrScheme[!isHover.val ? 'fontPrimary' : 'fontAccent'].toString(), fontWeight: 'bold'}} href={link}>
+                {children}
+            </a>
+            
+            {caption && 
+                <caption 
+                    style={{
+                        zIndex: 4,
+                        top: pos.y, 
+                        left: pos.x,
+                        backgroundColor: clrScheme.accent.toString(),
+                        borderColor: clrScheme.accent.toString(), 
+                        color: clrScheme.accent.grade(200).toString(),
+                    }} 
+                    ref={captionRef} 
+                    className={`${!show ? 'hidden' : ''} caption`}
+                >
+                    {caption}
+                </caption>
+            }
+        </span>
+    );
+};
+
 
 export const ColorPickerListItem  = ({scheme, optionVal, onHover, onClick}:{scheme:ColorScheme, optionVal:number, onHover:(val:number)=>void, onClick:(val:number)=>void}) => {
-    const clrScheme = React.useContext<ColorScheme>(AppContext)
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
     const [isHover, setIsHover] = React.useState(false);
 
     const handleMouseEnter = (val:number) => {
@@ -192,6 +250,7 @@ export const ColorPickerListItem  = ({scheme, optionVal, onHover, onClick}:{sche
 export const Dropdown = ({target, onFocusLost, children}:{target:React.JSX.Element, onFocusLost?:()=>void, children:any}) => {
     const [isHidden, setIsHidden] = React.useState(true); 
     const selfRef = React.useRef<HTMLDivElement>(null);    
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
     
     React.useEffect(() => {
         const onClickOff = (ev:MouseEvent) => {
@@ -204,15 +263,13 @@ export const Dropdown = ({target, onFocusLost, children}:{target:React.JSX.Eleme
         document.addEventListener('click', onClickOff)
     }, [])
 
-    // React.useEffect(() => {
-    //     console.log("Changing hidden, new val: ", isHidden)
-    // }, [isHidden])
-
     return <div className='dropdown' ref={selfRef}>
         <div className='dropdown-target' onClick={() => setIsHidden(false)}>
             {target}
         </div>
-        <div className='dropdown-content' style={{visibility: isHidden ? 'hidden' : 'unset'}} onClick={() => setIsHidden(true)}>
+        <div className='dropdown-content' style={{visibility: isHidden ? 'hidden' : 'unset',
+            border: `solid 2px ${clrScheme.primary.grade(20).toString()}`
+        }} onClick={() => setIsHidden(true)}>
             {children}
         </div>
     </div>
