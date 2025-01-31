@@ -13,9 +13,24 @@ export const AppContext = React.createContext<{
 }); 
 
 export const App = () => {
-    const [schemeI, setSchemeI] = React.useState(0); 
+    const [schemeI, setSchemeI] = React.useState(-1);
+    
+    // handle color scheme change
+    React.useEffect(() => {
+        document.hasStorageAccess()
+            .then(hasAccess => {
+                if(!hasAccess) return; 
+                const KEY = 'kakumuo-color-scheme'
+                
+                const val = localStorage.getItem(KEY);
+                if(schemeI == -1) {
+                    setSchemeI(val ? Number.parseInt(val) : 0); 
+                }
+                else localStorage.setItem(KEY, `${schemeI}`)
+            })
+    }, [schemeI])
 
-    return <AppContext.Provider value={{
+    return <>{schemeI == -1 ? <></> : <AppContext.Provider value={{
         schemeI: schemeI, 
         setSchemeI: setSchemeI
     }}>
@@ -25,7 +40,7 @@ export const App = () => {
                 <Route path='/projects' Component={AllProjects} />
             </Routes>
         </BrowserRouter>
-    </AppContext.Provider>
+    </AppContext.Provider>}</>
 }
 
 export const HeaderNav = () => {

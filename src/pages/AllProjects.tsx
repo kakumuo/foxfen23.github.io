@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {AppContext} from '../app'
 import { sampleColorSchemes,ProjectDetails, projectData  } from '../util/Details';
-import { ArrowBack, ArrowRight } from '@mui/icons-material';
+import { ArrowBack, ArrowForward, ArrowOutward, ArrowRight } from '@mui/icons-material';
 import { Link } from 'react-router';
-import { Tag } from '../util/Components';
+import { LookAt, Tag } from '../util/Components';
 
 const TRANS_SPEED = ".2s"
 
@@ -30,7 +30,14 @@ export const AllProjects = () => {
         width: '100%'
     }
 
-    return <main style={{
+    return <div 
+        style={{
+            display: 'grid', gridTemplateColumns: 'auto', gridTemplateRows: 'auto',
+            backgroundColor: clrScheme.primary.toString()
+        }}
+    >
+    
+    <main style={{
         backgroundColor: clrScheme.primary.toString(),
         width: '100vw',
         minHeight: '100vh',
@@ -39,6 +46,9 @@ export const AllProjects = () => {
         display: 'grid', 
         gridTemplateColumns: 'auto', 
         gridTemplateRows: 'auto auto 1fr',
+
+        maxWidth: 1250,
+        marginLeft: 'auto', marginRight: 'auto',
 
         color: clrScheme.fontPrimary.toString()
     }}>
@@ -65,29 +75,35 @@ export const AllProjects = () => {
                 {projectData.map((proj, projI) => <ProjectTableRow key={projI} project={proj} isLastRow={projI == projectData.length - 1} isGreyOut={tableHover} />)}
             </tbody>
         </table>
-    </main>
+    </main></div>
 }
 
 const ProjectTableHeader = ({}:{}) => {
-    return <thead style={{verticalAlign: 'bottom'}}>
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
+
+    return <thead style={{verticalAlign: 'bottom', borderBottom: `solid 4px ${clrScheme.accent.trans(.7)}`}}>
         <tr style={{display: 'table-row', height: '10px'}}>
-            {["Year", "Project", "Made At", "Built With"].map((h, hI) => <th style={{width: COL_WIDTH[hI], textAlign: 'left'}} key={h}>{h}</th>)}
+            {["Year", "Project", "Made At", "Built With"].map((h, hI) => <th style={{width: COL_WIDTH[hI], textAlign: 'left', paddingBottom: 8}} key={h}>{h}</th>)}
         </tr>
     </thead>
 }
 
 const GREY_OUT = .5
+const PERSONAL_FILLER = 'A personal project used to explore and gain an understanding for emerging technologies'
 const ProjectTableRow = ({project, isLastRow, isGreyOut}:{project:ProjectDetails, isLastRow:boolean, isGreyOut:boolean}) => {
     const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
     const [linkHover, setLinkHover] = React.useState(false)
     const [isHover, setIsHover] = React.useState(false)
 
     const rowStyle:React.CSSProperties = {
-        borderBottom: !isLastRow ? `solid 1px ${clrScheme.primary.grade(-25).toString()}` : '',
+        borderBottom: !isLastRow ? `solid 1px ${clrScheme.primary.grade(200).trans(.1).toString()}` : '',
         color: clrScheme.fontPrimary.trans(isHover ? 1 : isGreyOut ? GREY_OUT : 1).toString(),
+        backgroundColor: isHover ? clrScheme.primary.grade(200).trans(.1).toString() : '',
         transition: TRANS_SPEED,
-        height: 30,
-        padding: 0, 
+        height: 70,
+        minHeight: 70,
+        maxHeight: 70,
+        padding: 0,
         margin: 0
    }
 
@@ -100,9 +116,12 @@ const ProjectTableRow = ({project, isLastRow, isGreyOut}:{project:ProjectDetails
     }
 
     const linkStyle:React.CSSProperties = {
+        display: 'flex',
         textDecoration: 'none',
         fontWeight: 'bolder', 
         color: clrScheme[linkHover ? 'fontAccent' : 'fontPrimary'].trans(isHover ? 1 : isGreyOut ? GREY_OUT : 1).toString(), 
+        alignContent: 'center', 
+        gap: 8,
         transition: TRANS_SPEED
     }
 
@@ -112,7 +131,7 @@ const ProjectTableRow = ({project, isLastRow, isGreyOut}:{project:ProjectDetails
                 color: clrScheme.fontAccent.trans(isHover ? 1 : isGreyOut ? GREY_OUT : 1).toString(),
                 transition: TRANS_SPEED
             }} key={t} label={t} />
-    } 
+    }
 
     const tdCommonProp:React.CSSProperties = {}
 
@@ -122,13 +141,33 @@ const ProjectTableRow = ({project, isLastRow, isGreyOut}:{project:ProjectDetails
     >
         <td style={{fontWeight: 'lighter', minWidth: COL_WIDTH[0], ...tdCommonProp}}>{project.year}</td>
         <td style={{minWidth: COL_WIDTH[1], ...tdCommonProp}}>{
-            <Link 
+            project.link ? <Link 
                 style={linkStyle} to={project.link}
                 onMouseEnter={() => setLinkHover(true)}
                 onMouseLeave={() => setLinkHover(false)}
-            >{project.title}</Link>
+            >
+                {<LookAt caption={project.desc} children={project.title} outerStyle={{color: linkStyle.color}}/>}
+                {
+                    project.link ?
+                    <ArrowForward style={{transform: linkHover ? `translateX(10px)` : "", transition: TRANS_SPEED}} />
+                    : <></>
+                }
+            </Link> 
+            : 
+            <div
+                style={linkStyle}
+                onMouseEnter={() => setLinkHover(true)}
+                onMouseLeave={() => setLinkHover(false)}
+            >
+            {<LookAt caption={project.desc} children={project.title} outerStyle={{color: linkStyle.color}}/>}
+                {
+                    project.link ?
+                    <ArrowForward style={{transform: linkHover ? `translateX(10px)` : "", transition: TRANS_SPEED}} />
+                    : <></>
+                }
+            </div>
         }</td>
-        <td style={{fontWeight: 'lighter', minWidth: COL_WIDTH[2], ...tdCommonProp}}>{project.devAt}</td>
+        <td style={{fontWeight: 'lighter', minWidth: COL_WIDTH[2], ...tdCommonProp}}>{<LookAt caption={project.devAt ? project.devAtDesc : PERSONAL_FILLER} outerStyle={{fontWeight: 'lighter'}} children={project.devAt ? project.devAt : 'Personal Project'} />}</td>
         <td><div style={{...techUsedStyle, ...tdCommonProp}}>{project.techUsed.map(t => createTag(t))}</div></td>
     </tr>
 }

@@ -1,59 +1,77 @@
+import React from "react";
+import { LookAt } from "./Components";
 
 export type ProjectDetails = {
     title:string, 
     desc:string, 
-    link:string, 
+    link?:string, 
     thumbnail:string, 
     techUsed:string[], 
-    devAt:string, 
+    devAt?:string, 
+    devAtDesc?:string,
     year:number, 
 }
 
 export const projectData: ProjectDetails[] = [
     {
-      title: "EcoTrack",
-      desc: "A mobile app for tracking personal carbon footprint and suggesting eco-friendly alternatives.",
-      link: "https://github.com/username/ecotrack",
-      thumbnail: "https://placehold.co/600x400/EEE/31343C",
-      techUsed: ["React Native", "Node.js", "MongoDB", "AWS"],
-      devAt: "Green Solutions Inc.",
-      year: 2024
-    },
-    {
-      title: "MindfulMe",
-      desc: "A web-based meditation and mindfulness platform with guided sessions and progress tracking.",
-      link: "https://mindfulme.app",
-      thumbnail: "https://placehold.co/100x400/EEE/31343C",
-      techUsed: ["Vue.js", "Express", "PostgreSQL", "Docker"],
-      devAt: "Wellness Tech Startup",
-      year: 2023
-    },
-    {
-      title: "SmartHome Hub",
-      desc: "An IoT solution for integrating and controlling various smart home devices through a single interface.",
-      link: "https://smarthomehub.io",
-      thumbnail: "https://example.com/images/smarthomehub-thumb.jpg",
-      techUsed: ["Python", "Raspberry Pi", "MQTT", "React", "GraphQL"],
-      devAt: "ConnectedLiving Labs",
+      title: "PopGen",
+      desc: "A browser plugin to autofill listings on Depop",
+      link: "https://github.com/kakumuo/inventory-sync/tree/popgen",
+      thumbnail: "/resources/popgen.png",
+      techUsed: ["React", "Typescript", "LLM (LLaVA)"],
+      // devAt: "Personal Project",
+      // devAtDesc: "Developed this on my free time as a means of exploring new technologies", 
       year: 2025
     },
     {
-      title: "CodeMentor AI",
-      desc: "An AI-powered coding assistant and tutor for beginner programmers.",
-      link: "https://github.com/username/codementor-ai",
-      thumbnail: "https://example.com/images/codementor-thumb.png",
-      techUsed: ["Python", "TensorFlow", "Flask", "Angular", "OpenAI API"],
-      devAt: "EduTech Innovations",
+      title: "Shortcuts.io",
+      desc: "A simple shortcut logging application for different programs. Hosted locally through Apache.",
+      link: "https://github.com/kakumuo/shortcuts-app",
+      thumbnail: "/resources/shortcuts.png",
+      techUsed: ["React", "Typescript", "MongoDB", "Apache"],
+      // devAt: "Wellness Tech Startup",
+      // devAtDesc: "Wellness Tech Startup company details go here", 
       year: 2024
     },
     {
-      title: "UrbanFarmer",
-      desc: "A mobile app for managing urban gardens and connecting local food producers with consumers.",
-      link: "https://urbanfarmer.app",
-      thumbnail: "https://example.com/images/urbanfarmer-thumb.jpg",
-      techUsed: ["Flutter", "Firebase", "Google Maps API", "Node.js"],
-      devAt: "Sustainable City Solutions",
+      title: "SSIS Jenkins Pipeline",
+      desc: "Create a Jenkins pipeline to automatically push SSIS and Stored Procedures to development and production MSSQL Servers.",
+      // link: "https://smarthomehub.io",
+      thumbnail: "/resources/jenkins.png",
+      techUsed: ["Jenkins", "Groovy", "Powershell"],
+      devAt: "United Parcel Service",
+      devAtDesc: "Premier package delivery company and a leading provider of global supply chain management solutions.", 
       year: 2023
+    },
+    {
+      title: "CPS Contacts",
+      desc: "Developed an ETL Pipeline to push over 200M UPS MyChoice Contact and Account details to Salesforce for sales and claims purposes.",
+      // link: "https://github.com/username/codementor-ai",
+      thumbnail: "/resources/upsmychoice.png",
+      techUsed: ["SSIS", "Java", "Python", "SQL", "Salesforce", "Maven"],
+      devAt: "United Parcel Service",
+      devAtDesc: "Premier package delivery company and a leading provider of global supply chain management solutions.", 
+      year: 2022
+    },
+    {
+      title: "DigiBadge",
+      desc: "Developed a proof of concept for a digital mobile badge system. Developed during UPS Intern Hackathon. Presented findings to UPS CE/IO.",
+      // link: "https://urbanfarmer.app",
+      thumbnail: "/resources/digitalbadge.png",
+      techUsed: ["AWS", "Axure RP8", "Swift", "Firebase", "React" ],
+      devAt: "United Parcel Service",
+      devAtDesc: "Premier package delivery company and a leading provider of global supply chain management solutions.", 
+      year: 2019
+    }, 
+    {
+      title: "Walkability Metric",
+      desc: "Developed plugin for Rhino to measure walkability of different locations using GIS data. Presented findings to KPF Architecture Firm.",
+      // link: "https://urbanfarmer.app",
+      thumbnail: "/resources/walkability.png",
+      techUsed: ["Rhino", "Python"],
+      devAt: "New Jersey Institute of Technology (NJIT)",
+      devAtDesc: "New Jersey polytechnic university offering more than 125 undergraduate and graduate degree programs in six specialized schools", 
+      year: 2019
     }
 ];
 
@@ -69,33 +87,80 @@ export type ExperienceDetails = {
 }
 
 export const experienceData: ExperienceDetails[] = [
-    {
-      startDate: new Date('2022-03-15'),
-      jobTitle: 'Senior Full Stack Developer',
-      location: 'Bringa',
-      desc: 'Led a team of developers in creating scalable web applications for fintech clients. Implemented microservices architecture and improved system performance by 40%.',
-      techUsed: ['React', 'Node.js', 'TypeScript', 'MongoDB', 'Docker', 'AWS'],
-      jobLink: 'https://example.com/senior-fullstack-dev'
-    },
-    {
-      startDate: new Date('2019-07-01'),
-      endDate: new Date('2022-03-14'),
-      jobTitle: 'Frontend Developer',
-      location: 'FedCorp',
-      desc: 'Developed responsive user interfaces for e-commerce platforms. Collaborated with UX designers to implement pixel-perfect designs and improve user engagement.',
-      techUsed: ['Vue.js', 'JavaScript', 'SASS', 'Webpack', 'Jest'],
-      jobLink: 'https://example.com/frontend-dev'
-    },
-    {
-      startDate: new Date('2019-01-10'),
-      endDate: new Date('2019-06-30'),
-      jobTitle: 'Junior Software Engineer',
-      location: 'Space Industries',
-      desc: 'Assisted in the development of backend services for a social media analytics tool. Implemented RESTful APIs and contributed to database optimization.',
-      techUsed: ['Python', 'Django', 'PostgreSQL', 'Redis', 'Git'],
-      jobLink: 'https://example.com/junior-software-engineer'
-    }
+  {
+    startDate: new Date('2020-10-01'),
+    endDate: undefined, // Current position as of the given date
+    jobTitle: 'Application Developer',
+    location: 'UPS',
+    desc: 'Promoted from Software Developer I. Worked on Marketing Automation applications and the greater CIDH application. Developed various SSIS pipelines, conducted knowledge transfer sessions, and worked with interns. Performed various maintenance tasks including monthly audits, fixing issues, and implementing systematic alerting. Involved in Linux server migration, preference updates, and Openshift training.',
+    techUsed: ['Marketo', 'SSDT', 'MSSQL', 'JBoss Fuse', 'GIT', 'SQL', 'Java', 'Everbridge', 'Openshift', 'Docker', 'TFS'],
+    jobLink: ''
+  },
+  {
+    startDate: new Date('2019-06-01'),
+    endDate: new Date('2019-09-01'),
+    jobTitle: 'Summer Intern',
+    location: 'UPS',
+    desc: 'Worked on the Marketing Automation Application, handling lead and account records. Improved bulk upload processes, presented at a hackathon, and developed Jenkins pipelines. Participated in Agile coaching and ceremonies.',
+    techUsed: ['Maven', 'Camel', 'JBoss Fuse', 'MSSQL', 'Marketo', 'Jenkins', 'Groovy', 'Nexus', 'TFS', 'SonarQube', 'AWS', 'Swift', 'Firebase', 'Angular', 'React'],
+    jobLink: ''
+  },
+  {
+    startDate: new Date('2017-09-01'),
+    endDate: new Date('2018-12-01'),
+    jobTitle: 'Undergraduate Teaching Assistant',
+    location: 'NJIT',
+    desc: 'Served as a teaching assistant for CS113, CS114, and CS115 courses. Responsibilities included grading assignments, leading lab sections, creating exam prep materials, and providing office hours support. Taught Java and C++ based Data Structures and Algorithms courses.',
+    techUsed: ['Java', 'C++'],
+    jobLink: ''
+  },
+  {
+    startDate: new Date('2017-09-01'),
+    endDate: new Date('2017-12-01'),
+    jobTitle: 'ACM Volunteer Tutor',
+    location: 'NJIT',
+    desc: 'Assisted over 40 students throughout the year on various computer science courses including Data Structures and Algorithms, Operating Systems, Introduction to Linux Systems, and Introduction to Computer Systems.',
+    techUsed: [],
+    jobLink: ''
+  }
 ];
+
+
+export type ParagraphText = {
+  text:string, 
+  lookAt?:{
+    caption: string
+    link?: string
+  }
+}
+
+export type Paragraph = {
+  phrases:ParagraphText[]
+}
+
+export const aboutDetails = {
+  title: 'Backend Developer',
+  name: 'Kevin Akumuo', 
+  subTitle: 'Developing Since 2015',
+  desc: [
+    {
+      phrases: [
+        { text: "Experienced software developer with a strong background in" },
+        { text: " Backend ", lookAt: { caption: "Working on server-side software, which focuses on everything you can't see on a website" } },
+        { text: " and " },
+        { text: " ETL ", lookAt: { caption: "Extract Transform and Load" } },
+        { text: "development. Currently working as a " },
+        { text: "Applicaiton Developer II at UPS", lookAt: { caption: "Current Role", link: "https://www.ups.com/us/en/home" } },
+        { text: ", where I've been instrumental in developing and improving critical processes for managing large-scale customer data." }
+      ]
+    },
+    {
+      phrases: [
+        { text: "Committed to continuous learning and applying cutting-edge solutions to complex business problems in the rapidly evolving field of software development." }
+      ]
+    }
+  ]  
+}
 
 
 export type ColorScheme =  {

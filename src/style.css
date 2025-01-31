@@ -9,19 +9,29 @@
     --clr-font-pri: #020202; 
     --clr-font-acc: #3b3bab; 
 
-    --anim-trans: .1s
+    --anim-trans: .1s;
+
+    --selection-bkg: white; 
+    --selection-color: white; 
 }
 
 * {
     transition: var(--anim-trans) color;
     transition: var(--anim-trans) background-color;
+
+    ::selection {
+        background-color: var(--selection-bkg); 
+        color: var(--selection-color);
+    }
 }
 
 #app-content {
     position: relative;
-    display: grid;
+    /* display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr; */
+    display: flex;
+    flex-direction: column;
     padding: var(--main-padding);
     background-color: var(--clr-pri);
 }
@@ -88,12 +98,14 @@
 #main-content {
     padding-left: var(--width-leftsidebar);
     padding-right: var(--width-rightsidebar);
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: auto;
+    margin-right: auto;
 
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: repeat(auto-fill, auto);
+
+    max-width:1000px;
 }
 
 #left-sidebar {
@@ -122,21 +134,25 @@
 }
 
 #about-section{
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto;
-    gap: 32px;
-    padding-top: 10%;
+    min-height: 50vh;
+    #title {
+        font-size: larger;
+    }    
 
-    div {
-        display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: auto auto auto 1fr;
-        gap: 4px;
+    #name {
+        font-size: xxx-large;
+    }
+
+    #subtitle{
+        font-size: smaller; 
+        margin-bottom: 32px;
     }
 
     img {
-        height: 300px;
+        float: left;
+        margin-right: 16px;
+        margin-top: 8px;
+        max-width: 200px;
     }
 }
 
@@ -178,7 +194,7 @@
     padding: 8px;
     gap: 8px;
     min-height: 150px;
-    max-height: 150px;
+    /* max-height: 150px; */
     text-decoration : none;
     z-index: 0;
 
@@ -212,7 +228,9 @@
     }
 
     .tag-list {
+        margin-top: 16px;
         display: flex;
+        flex-wrap: wrap;
         gap: 8px;
     }
 
@@ -247,6 +265,7 @@
 
 .page-section {
     margin-top: 20vh;
+    min-height: 50vh;
 
     .section-goto {
         display: flex;
@@ -282,7 +301,10 @@
         position: fixed;
         pointer-events: none;
         padding: 8px;
+        font-weight: bold;
         
+        max-width: 200px;
+
         border-radius: 4px;
         filter: opacity(1);
         transition: var(--anim-trans) filter;

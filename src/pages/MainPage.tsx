@@ -1,8 +1,8 @@
 import React from "react";
 import { AppContext } from "../app";
 import * as MUIcons from '@mui/icons-material'
-import { CardData, CardList, ColorPickerListItem, Dropdown, LookAt, NavLink, PageSection } from '../util/Components'
-import { ColorScheme, experienceData, ExperienceDetails, projectData, sampleColorSchemes } from '../util/Details'
+import { CardData, CardList, ColorPickerListItem, Dropdown, IconMyAnimeList, LookAt, NavLink, PageSection } from '../util/Components'
+import { aboutDetails, ColorScheme, experienceData, ExperienceDetails, projectData, sampleColorSchemes } from '../util/Details'
 
 const sideNavOptions:{label:string, icon:React.JSX.Element, link:string}[] = [
     {label: "Contact Me", icon: <MUIcons.Mail />, link: 'mailto:akumuok@gmail.com'}, 
@@ -10,6 +10,7 @@ const sideNavOptions:{label:string, icon:React.JSX.Element, link:string}[] = [
     {label: "GitHub", icon: <MUIcons.GitHub />, link: 'https://github.com/kakumuo/'}, 
     {label: "Leetcode", icon: <MUIcons.Code />, link: 'https://leetcode.com/u/foxfen23/'}, 
     {label: "GoodReads", icon: <MUIcons.Book />, link: 'https://www.goodreads.com/user/show/186704789-kevin-akumuo'}, 
+    {label: "MyMangaList", icon: <IconMyAnimeList />, link: 'https://myanimelist.net/mangalist/foxfen64?status=2&order=4&order2=0'}
 ]
 
 const topNavOptions:{number:number, label:string, link:string}[] = [
@@ -24,12 +25,12 @@ const getStartEndDate = (exp:ExperienceDetails):string => {
     let startStr = "", endStr = "Present"
     const curDate = new Date(); 
 
-    startStr = monthMap[exp.startDate.getMonth()] 
+    startStr = monthMap[exp.startDate.getMonth()].substring(0, 3) 
     if(!(curDate.getFullYear() == exp.startDate.getFullYear() || exp.endDate && exp.endDate.getFullYear() == exp.startDate.getFullYear()))
         startStr += ` ${exp.startDate.getFullYear()}`
 
     if(exp.endDate){
-        endStr = monthMap[exp.endDate.getMonth()] 
+        endStr = monthMap[exp.endDate.getMonth()].substring(0, 3) 
         if(curDate.getFullYear() != exp.endDate.getFullYear())
             endStr += ` ${exp.endDate.getFullYear()}`
     }
@@ -41,26 +42,29 @@ export const MainPage = () => {
     const appContext = React.useContext(AppContext)
     const [curNav, setCurNav] = React.useState(0); 
 
+    // for color picker mouse hover
+    const [isColorPickerHover, setIsColorPickerHover] = React.useState(false); 
+
     const navRefs = [
         React.useRef<HTMLDivElement>(),React.useRef<HTMLDivElement>(),React.useRef<HTMLDivElement>()
     ]
 
     // Color scheme properties
     const [hoverSchemeI, setHoverSchemeI] = React.useState(-1); 
-    const [targetSchemeI, setTargetSchemeI] = React.useState(1); 
+    const [targetSchemeI, setTargetSchemeI] = React.useState(appContext.schemeI); 
     const clrScheme = sampleColorSchemes[appContext.schemeI]
     
-    const [projectCardData, setProjectCardData] = React.useState(projectData.map(p => {
+    const [projectCardData, setProjectCardData] = React.useState(projectData.filter((_, i) => i < 4).map(p => {
         return {
           aside: {type: 'img', val: p.thumbnail}, 
           desc: p.desc, 
           tags: p.techUsed, 
           link: p.link,
-          title: `${p.title} - ${p.devAt}`
+          title: `${p.title}${p.devAt ? ' - ' + p.devAt : ''}`
         } as CardData
     }))
 
-    const [cardData, setCardData] = React.useState(experienceData.map(d => {
+    const [cardData, setCardData] = React.useState(experienceData.filter(d => Math.abs(d.startDate.getFullYear() - new Date().getFullYear()) < 7).map(d => {
         return {
             aside: {type: 'text', val: getStartEndDate(d)}, 
             desc: d.desc, 
@@ -93,7 +97,16 @@ export const MainPage = () => {
     }
 
     React.useEffect(() => {
-        appContext.setSchemeI(hoverSchemeI != -1 ? hoverSchemeI : targetSchemeI)
+        const target = hoverSchemeI != -1 ? hoverSchemeI : targetSchemeI
+        appContext.setSchemeI(target) 
+
+        document.documentElement.style.setProperty("--selection-bkg", 
+            sampleColorSchemes[target].accent.toString()
+        )
+
+        document.documentElement.style.setProperty("--selection-color", 
+            sampleColorSchemes[target].accent.grade(200).toString()
+        )
     }, [hoverSchemeI, targetSchemeI])
 
     // SCROLL BEHAVIOR
@@ -137,9 +150,6 @@ export const MainPage = () => {
             document.removeEventListener('scroll', onScroll); 
         }
     }, [curNav])
-    
-    // for color picker mouse hover
-    const [isHover, setIsHover] = React.useState(false); 
 
     return <div id='app-content' style={{backgroundColor: clrScheme.primary.toString(), color: clrScheme.fontPrimary.toString()}}>
     <header id='header-nav' style={{backgroundColor: clrScheme.primary.grade(20).toString(), color: clrScheme.fontPrimary.toString()}}>
@@ -154,9 +164,9 @@ export const MainPage = () => {
         )}
         <Dropdown onFocusLost={() => handleSchemeFocusLost()} target={<MUIcons.ColorLens
             className='look-at'
-            style={{color: clrScheme[!isHover ? 'fontPrimary' : 'fontAccent'].toString()}}
-            onMouseEnter={() => setIsHover(true)}
-            onMouseLeave={() => setIsHover(false)}
+            style={{color: clrScheme[!isColorPickerHover ? 'fontPrimary' : 'fontAccent'].toString()}}
+            onMouseEnter={() => setIsColorPickerHover(true)}
+            onMouseLeave={() => setIsColorPickerHover(false)}
         />} >
             {sampleColorSchemes.map((scheme, schemeI) => (
                 <ColorPickerListItem key={scheme.label} scheme={scheme} optionVal={schemeI}
@@ -168,20 +178,26 @@ export const MainPage = () => {
     <main id='main-content'>
         <PageSection pageRef={navRefs[0]} id='about-section'>
             <img style={{border: `solid 1px ${clrScheme.accent.toString()}`}} src='/resources/profile_kevin.jpg' />
-            <div>
-                <h3 style={{color: clrScheme.fontAccent.toString()}}>Backend Developer</h3>
-                <h1>Kevin Akumuo</h1>
-                <h6 style={{color: clrScheme.fontAccent.toString()}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h6>
+            <p id="profile-group">
+                <h3 style={{color: clrScheme.fontAccent.toString()}} id="title">{aboutDetails.title}</h3>
+                <h1 id="name">{aboutDetails.name}</h1>
+                <h6 style={{color: clrScheme.fontAccent.toString()}} id="subtitle">{aboutDetails.subTitle}</h6>
 
-                <p style={{fontWeight: 'lighter'}}>Lorem ipsum dolor sit amet <LookAt caption='Some caption that should go here'>consectetur adipisicing elit. Ipsam, ab in. Nihil sit repellat</LookAt> impedit voluptates, porro cupiditate provident fuga sequi accusamus, deleniti, dignissimos ipsum itaque saepe quas recusandae perferendis modi! Recusandae magni et, sequi magnam repellendus ducimus quo reiciendis minus possimus minima odio? Eum sed id aut unde quibusdam sit? Recusandae possimus inventore, nihil qui maxime accusantium fuga. Quibusdam qui nobis repellendus optio assumenda! Dicta cumque sunt nesciunt asperiores praesentium ullam error debitis provident est reiciendis commodi nobis ipsam repellat ipsa odit repellendus iusto a vero perferendis sapiente, consequuntur magnam saepe minima quae. Rem pariatur maiores assumenda ab alias!</p>
-            </div>
+                {aboutDetails.desc.map((para, paraI) => {
+                    return <p key={paraI} style={{marginBottom: 8}}>{
+                        para.phrases.map(phrase => {
+                            return phrase.lookAt ? <LookAt caption={phrase.lookAt.caption} link={phrase.lookAt.link}>{phrase.text}</LookAt> : phrase.text
+                        })    
+                    }</p>
+                })}
+            </p>
         </PageSection>
 
         <PageSection pageRef={navRefs[1]} id='projects-section' gotoLabel='More Projects' link='/projects/'>
             <CardList data={projectCardData} />
         </PageSection>
 
-        <PageSection pageRef={navRefs[2]} id='experience-section' gotoLabel='Show Resume'>
+        <PageSection pageRef={navRefs[2]} id='experience-section' gotoLabel='Show Resume' link="/resources/resume.pdf">
             <CardList data={cardData} />
         </PageSection>
     </main>
