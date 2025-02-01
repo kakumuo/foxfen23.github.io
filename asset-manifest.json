@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "./foxfen23.github.io/static/css/main.144ee65a.css",
-    "main.js": "./foxfen23.github.io/static/js/main.2fbbb0b5.js",
-    "index.html": "./foxfen23.github.io/index.html",
-    "main.144ee65a.css.map": "./foxfen23.github.io/static/css/main.144ee65a.css.map",
-    "main.2fbbb0b5.js.map": "./foxfen23.github.io/static/js/main.2fbbb0b5.js.map"
+    "main.css": "/foxfen23.github.io/static/css/main.144ee65a.css",
+    "main.js": "/foxfen23.github.io/static/js/main.2fbbb0b5.js",
+    "index.html": "/foxfen23.github.io/index.html",
+    "main.144ee65a.css.map": "/foxfen23.github.io/static/css/main.144ee65a.css.map",
+    "main.2fbbb0b5.js.map": "/foxfen23.github.io/static/js/main.2fbbb0b5.js.map"
   },
   "entrypoints": [
     "static/css/main.144ee65a.css",
