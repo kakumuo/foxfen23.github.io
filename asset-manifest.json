@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/kakumuo.github.io/foxfen23.github.io/static/css/main.144ee65a.css",
-    "main.js": "/kakumuo.github.io/foxfen23.github.io/static/js/main.d96f76c7.js",
-    "index.html": "/kakumuo.github.io/foxfen23.github.io/index.html",
-    "main.144ee65a.css.map": "/kakumuo.github.io/foxfen23.github.io/static/css/main.144ee65a.css.map",
-    "main.d96f76c7.js.map": "/kakumuo.github.io/foxfen23.github.io/static/js/main.d96f76c7.js.map"
+    "main.css": "./static/css/main.144ee65a.css",
+    "main.js": "./static/js/main.1f07d2c6.js",
+    "index.html": "./index.html",
+    "main.144ee65a.css.map": "./static/css/main.144ee65a.css.map",
+    "main.1f07d2c6.js.map": "./static/js/main.1f07d2c6.js.map"
   },
   "entrypoints": [
     "static/css/main.144ee65a.css",
-    "static/js/main.d96f76c7.js"
+    "static/js/main.1f07d2c6.js"
   ]
 }
