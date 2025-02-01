@@ -1,6 +1,6 @@
 {
   "name": "kakumuo-portfolio",
-  "homepage": "https://kakumuo.github.io/foxfen23.github.io",
+  "homepage": "https://kakumuo.github.io/portfolio",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
