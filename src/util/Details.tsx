@@ -17,7 +17,7 @@ export const projectData: ProjectDetails[] = [
       title: "PopGen",
       desc: "A browser plugin to autofill listings on Depop using LLM functions.",
       link: "https://github.com/kakumuo/inventory-sync/tree/popgen",
-      thumbnail: "/resources/popgen.png",
+      thumbnail: "./resources/popgen.png",
       techUsed: ["React", "Typescript", "LLM (LLaVA)"],
       // devAt: "Personal Project",
       // devAtDesc: "Developed this on my free time as a means of exploring new technologies", 
@@ -27,7 +27,7 @@ export const projectData: ProjectDetails[] = [
       title: "Shortcuts.io",
       desc: "A simple shortcut logging application for different programs. Hosted locally through Apache.",
       link: "https://github.com/kakumuo/shortcuts-app",
-      thumbnail: "/resources/shortcuts.png",
+      thumbnail: "./resources/shortcuts.png",
       techUsed: ["React", "Typescript", "MongoDB", "Apache"],
       // devAt: "Wellness Tech Startup",
       // devAtDesc: "Wellness Tech Startup company details go here", 
@@ -37,7 +37,7 @@ export const projectData: ProjectDetails[] = [
       title: "SSIS Jenkins Pipeline",
       desc: "CI/CD Jenkins pipeline to automatically push SSIS and Stored Procedures to development and production MSSQL Servers.",
       // link: "https://smarthomehub.io",
-      thumbnail: "/resources/jenkins.png",
+      thumbnail: "./resources/jenkins.png",
       techUsed: ["Jenkins", "Groovy", "Powershell"],
       devAt: "United Parcel Service",
       devAtDesc: "Premier package delivery company and a leading provider of global supply chain management solutions.", 
@@ -47,7 +47,7 @@ export const projectData: ProjectDetails[] = [
       title: "CPS Contacts",
       desc: "An ETL Pipeline to push over 200M UPS MyChoice Contact and Account details to Salesforce for sales and claims purposes.",
       // link: "https://github.com/username/codementor-ai",
-      thumbnail: "/resources/upsmychoice.png",
+      thumbnail: "./resources/upsmychoice.png",
       techUsed: ["SSIS", "Java", "Python", "SQL", "Salesforce", "Maven"],
       devAt: "United Parcel Service",
       devAtDesc: "Premier package delivery company and a leading provider of global supply chain management solutions.", 
@@ -57,7 +57,7 @@ export const projectData: ProjectDetails[] = [
       title: "DigiBadge",
       desc: "A proof of concept for a digital mobile badge system. Developed during UPS Intern Hackathon. Presented findings to UPS CE/IO.",
       // link: "https://urbanfarmer.app",
-      thumbnail: "/resources/digitalbadge.png",
+      thumbnail: "./resources/digitalbadge.png",
       techUsed: ["AWS", "Axure RP8", "Swift", "Firebase", "React" ],
       devAt: "United Parcel Service",
       devAtDesc: "Premier package delivery company and a leading provider of global supply chain management solutions.", 
@@ -67,7 +67,7 @@ export const projectData: ProjectDetails[] = [
       title: "Walkability Metric",
       desc: "A Rhino plugin to measure walkability of different locations using GIS data. Presented findings to KPF Architecture Firm.",
       // link: "https://urbanfarmer.app",
-      thumbnail: "/resources/walkability.png",
+      thumbnail: "./resources/walkability.png",
       techUsed: ["Rhino", "Python"],
       devAt: "New Jersey Institute of Technology (NJIT)",
       devAtDesc: "New Jersey polytechnic university offering more than 125 undergraduate and graduate degree programs in six specialized schools", 
@@ -88,7 +88,7 @@ export type ExperienceDetails = {
 
 export const experienceData: ExperienceDetails[] = [
   {
-    startDate: new Date('2020-10-01'),
+    startDate: new Date('2019-10-01'),
     endDate: undefined, // Current position as of the given date
     jobTitle: 'Application Developer',
     location: 'UPS',
@@ -97,7 +97,7 @@ export const experienceData: ExperienceDetails[] = [
     jobLink: ''
   },
   {
-    startDate: new Date('2019-06-01'),
+    startDate: new Date('2019-06-04'),
     endDate: new Date('2019-09-01'),
     jobTitle: 'Summer Intern',
     location: 'UPS',
@@ -126,12 +126,14 @@ export const experienceData: ExperienceDetails[] = [
 ];
 
 
+export type LookAtDetail = {
+  caption?: string
+  link?: string
+}
+
 export type ParagraphText = {
   text:string, 
-  lookAt?:{
-    caption: string
-    link?: string
-  }
+  lookAt?:LookAtDetail
 }
 
 export type Paragraph = {
@@ -150,7 +152,7 @@ export const aboutDetails = {
         { text: " and " },
         { text: " ETL ", lookAt: {} },
         { text: "development. Currently working as a " },
-        { text: "Applicaiton Developer II at UPS", lookAt: { caption: "/resources/ups.png", link: "https://www.ups.com/us/en/home" } },
+        { text: "Applicaiton Developer II at UPS", lookAt: {link: "https://www.ups.com/us/en/home" } },
         { text: ", where I've been instrumental in developing and improving critical processes for managing large-scale customer data." }
       ]
     },
@@ -291,7 +293,7 @@ export const sampleColorSchemes: ColorScheme[] = [
   }, 
   {
     label: "Terminal",
-    labelFont: "1rem 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;",
+    labelFont: "bold 1rem Consolas,monaco,monospace",
     primary: new Color("#000000"),
     accent: new Color("#00ff00"),
     fontPrimary: new Color("#ffffff"),

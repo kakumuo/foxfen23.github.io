@@ -10,6 +10,7 @@ A basic portfolio site
 ### Fixes
 - ~~section not underlining after changing theme once~~ [use 'useRef' instead of 'createRef', resets on repaint]
 - ~~look at caption leading of top of page~~ [negate y pos when out of bounds]
+- ~~react router not working w/ github pages~~ [resolved through: https://medium.com/@bennirus/deploying-a-create-react-app-with-routing-to-github-pages-f386b6ce84c2]
 ### Future
 - reactive
 - fill with data

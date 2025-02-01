@@ -226,6 +226,9 @@
             display: flex;
             width: 100%;
             justify-content: space-between;
+            * {
+                transition: var(--anim-trans);
+            }
         }
     }
 
@@ -272,7 +275,7 @@
     .section-goto {
         display: flex;
         text-decoration: none;
-        align-items: center;
+        
         justify-content: flex-end;
         font-weight: bolder;
         gap: 8px;

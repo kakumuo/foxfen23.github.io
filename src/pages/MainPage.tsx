@@ -2,13 +2,13 @@ import React from "react";
 import { AppContext } from "../app";
 import * as MUIcons from '@mui/icons-material'
 import { CardData, CardList, ColorPickerListItem, Dropdown, IconMyAnimeList, LookAt, NavLink, PageSection } from '../util/Components'
-import { aboutDetails, ColorScheme, experienceData, ExperienceDetails, projectData, sampleColorSchemes } from '../util/Details'
+import { aboutDetails, ColorScheme, experienceData, ExperienceDetails, LookAtDetail, projectData, sampleColorSchemes } from '../util/Details'
 
 const sideNavOptions:{label:string, icon:React.JSX.Element, link:string}[] = [
     {label: "Contact Me", icon: <MUIcons.Mail />, link: 'mailto:akumuok@gmail.com'}, 
     {label: "LinkedIn", icon: <MUIcons.LinkedIn />, link: 'https://www.linkedin.com/in/kevin-akumuo/'}, 
     {label: "GitHub", icon: <MUIcons.GitHub />, link: 'https://github.com/kakumuo/'}, 
-    {label: "Leetcode", icon: <MUIcons.Code />, link: 'https://leetcode.com/u/foxfen23/'}, 
+    {label: "LeetCode", icon: <MUIcons.Code />, link: 'https://leetcode.com/u/foxfen23/'}, 
     {label: "GoodReads", icon: <MUIcons.Book />, link: 'https://www.goodreads.com/user/show/186704789-kevin-akumuo'}, 
     {label: "MyMangaList", icon: <IconMyAnimeList />, link: 'https://myanimelist.net/mangalist/foxfen64?status=2&order=4&order2=0'}
 ]
@@ -118,7 +118,7 @@ export const MainPage = () => {
             const windowTop = window.scrollY + HEADER_OFFSET;
             const windowBottom = window.scrollY + window.innerHeight 
 
-            console.log({windowTop, windowBottom})
+            // console.log({windowTop, windowBottom})
 
             for(let refI = 0; refI < navRefs.length; refI++){
                 const ref = navRefs[refI]; 
@@ -141,7 +141,7 @@ export const MainPage = () => {
 
             if(maxRefI != curNav) setCurNav(maxRefI)
                 
-            console.log(maxRefI, curNav)
+            // console.log(maxRefI, curNav)
         }
 
         document.addEventListener('scroll', onScroll)
@@ -177,7 +177,7 @@ export const MainPage = () => {
 
     <main id='main-content'>
         <PageSection pageRef={navRefs[0]} id='about-section'>
-            <img style={{border: `solid 1px ${clrScheme.accent.toString()}`}} src='/resources/profile_kevin.jpg' />
+            <img style={{border: `solid 1px ${clrScheme.accent.toString()}`}} src='./resources/profile_kevin.jpg' />
             <p id="profile-group">
                 <h3 style={{color: clrScheme.fontAccent.toString()}} id="title">{aboutDetails.title}</h3>
                 <h1 id="name">{aboutDetails.name}</h1>
@@ -186,18 +186,18 @@ export const MainPage = () => {
                 {aboutDetails.desc.map((para, paraI) => {
                     return <p key={paraI} style={{marginBottom: 8}}>{
                         para.phrases.map(phrase => {
-                            return phrase.lookAt ? <LookAt caption={phrase.lookAt.caption} link={phrase.lookAt.link}>{phrase.text}</LookAt> : phrase.text
+                            return phrase.lookAt ? <LookAt caption={(phrase.lookAt as LookAtDetail).caption} link={phrase.lookAt.link}>{phrase.text}</LookAt> : phrase.text
                         })    
                     }</p>
                 })}
             </p>
         </PageSection>
 
-        <PageSection pageRef={navRefs[1]} id='projects-section' gotoLabel='More Projects' link='/projects/'>
+        <PageSection pageRef={navRefs[1]} id='projects-section' gotoLabel='More Projects' link='/projects'>
             <CardList data={projectCardData} />
         </PageSection>
 
-        <PageSection pageRef={navRefs[2]} id='experience-section' gotoLabel='Show Resume' link="/resources/resume.pdf">
+        <PageSection pageRef={navRefs[2]} id='experience-section' gotoLabel='Show Resume' link="./resources/resume.pdf">
             <CardList data={cardData} />
         </PageSection>
     </main>

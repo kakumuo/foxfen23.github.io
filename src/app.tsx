@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.css'
-import { Routes, BrowserRouter, Route } from 'react-router';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import { MainPage } from './pages/MainPage';
 import { AllProjects } from './pages/AllProjects';
 
@@ -34,12 +34,13 @@ export const App = () => {
         schemeI: schemeI, 
         setSchemeI: setSchemeI
     }}>
-        <BrowserRouter>
+        <HashRouter basename='/'>
             <Routes>
                 <Route path='/' Component={MainPage} />
                 <Route path='/projects' Component={AllProjects} />
+                <Route path='/*' element={<p>Path not resolved</p>} />
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     </AppContext.Provider>}</>
 }
 

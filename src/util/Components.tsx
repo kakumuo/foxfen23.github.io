@@ -216,7 +216,8 @@ export const LookAt = ({caption, outerStyle={}, innerStyle={}, link, children}:{
                     ref={captionRef} 
                     className={`${!show ? 'hidden' : ''} caption`}
                 >
-                    {caption.match(/.*\..../) ? <img style={{width: '100%', padding: 4}} src={caption} /> : caption}
+                    {/* {caption.match(/.*\....$/) ? <img style={{width: '100%', padding: 4}} src={caption} /> : caption} */}
+                    {caption}
                 </caption>
             }
         </span>
