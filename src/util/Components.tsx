@@ -9,7 +9,9 @@ import { Link } from 'react-router'
 
 const GREY_OUT = .5
 export const Tag = ({label, style}:{label:string, style?:React.CSSProperties}) => {
-    return <p style={{...style, fontWeight: 'bold'}} className="tag" >{label}</p>
+    const clrScheme = sampleColorSchemes[React.useContext(AppContext).schemeI]
+
+    return <p style={{...style, fontWeight: 'bold', backgroundColor: clrScheme.fontAccent.trans(.1).toString(),}} className="tag" >{label}</p>
 }
 
 const CardItem = ({greyOut, aside, title, desc, taglist, link}:{aside:{type:'text'|'img', val:string}, greyOut:boolean, title:string, desc:string, taglist:string[], link?:string}) => {
@@ -37,7 +39,6 @@ const CardItem = ({greyOut, aside, title, desc, taglist, link}:{aside:{type:'tex
             <div className="tag-list">{taglist.map((tag, tagI) =>
                 <Tag 
                     style={{
-                        backgroundColor: clrScheme.fontAccent.trans(.3).toString(),
                         color: clrScheme.fontAccent.trans(isHover ? 1 : greyOut ? GREY_OUT : 1).toString()
                     }} 
                     key={tagI}

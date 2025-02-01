@@ -127,7 +127,6 @@ const ProjectTableRow = ({project, isLastRow, isGreyOut}:{project:ProjectDetails
 
     const createTag = (t:string) => {
         return <Tag style={{
-                backgroundColor: clrScheme.fontAccent.trans(.3).toString(),
                 color: clrScheme.fontAccent.trans(isHover ? 1 : isGreyOut ? GREY_OUT : 1).toString(),
                 transition: TRANS_SPEED
             }} key={t} label={t} />
