@@ -9,7 +9,7 @@ import { Link } from 'react-router'
 
 const GREY_OUT = .5
 export const Tag = ({label, style}:{label:string, style?:React.CSSProperties}) => {
-    return <p style={{...style, fontWeight: '400'}} className="tag" >{label}</p>
+    return <p style={{...style, fontWeight: 'bold'}} className="tag" >{label}</p>
 }
 
 const CardItem = ({greyOut, aside, title, desc, taglist, link}:{aside:{type:'text'|'img', val:string}, greyOut:boolean, title:string, desc:string, taglist:string[], link?:string}) => {
@@ -18,7 +18,7 @@ const CardItem = ({greyOut, aside, title, desc, taglist, link}:{aside:{type:'tex
 
     return <a className='card' style={{
             color: clrScheme.fontPrimary.trans(isHover ? 1 : greyOut ? GREY_OUT : 1).toString(), 
-            borderColor: clrScheme[!isHover ? 'primary' : 'secondary'].toString()
+            borderColor: clrScheme.primary.grade(!isHover ? 0 : 200).trans(.5).toString()
         }}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
@@ -209,11 +209,13 @@ export const LookAt = ({caption, outerStyle={}, innerStyle={}, link, children}:{
                         backgroundColor: clrScheme.accent.toString(),
                         borderColor: clrScheme.accent.toString(), 
                         color: clrScheme.accent.grade(200).toString(),
+                        display: 'grid', 
+                        gridTemplateColumns: 'auto', gridTemplateRows: 'auto'
                     }} 
                     ref={captionRef} 
                     className={`${!show ? 'hidden' : ''} caption`}
                 >
-                    {caption}
+                    {caption.match(/.*\..../) ? <img style={{width: '100%', padding: 4}} src={caption} /> : caption}
                 </caption>
             }
         </span>
@@ -243,13 +245,12 @@ export const ColorPickerListItem  = ({scheme, optionVal, onHover, onClick}:{sche
         onMouseLeave={() => handleMouseLeave(optionVal)}
         onClick={() => onClick(optionVal)}
     >
-        <p style={{fontFamily: scheme.labelFont}}>{scheme.label}</p>
+        <p style={{font: scheme.labelFont}}>{scheme.label}</p>
         <div className='color-list'>
-            <div className='color-display' style={{backgroundColor: scheme.primary.toString()}} />
-            <div className='color-display' style={{backgroundColor: scheme.secondary.toString()}} />
-            <div className='color-display' style={{backgroundColor: scheme.accent.toString()}} />
-            <div className='color-display' style={{backgroundColor: scheme.fontPrimary.toString()}} />
-            <div className='color-display' style={{backgroundColor: scheme.fontAccent.toString()}} />
+            <div className='color-display' style={{backgroundColor: scheme.primary.toString()   , borderColor: scheme.primary.grade(25).toString()}} />
+            <div className='color-display' style={{backgroundColor: scheme.accent.toString()    , borderColor: scheme.accent.grade(25).toString()}} />
+            <div className='color-display' style={{backgroundColor: scheme.fontPrimary.toString()   , borderColor: scheme.fontPrimary.grade(25).toString()}} />
+            <div className='color-display' style={{backgroundColor: scheme.fontAccent.toString()   , borderColor: scheme.fontAccent.grade(25).toString()}} />
         </div>
     </div>
 }

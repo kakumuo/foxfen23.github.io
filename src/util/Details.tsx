@@ -15,7 +15,7 @@ export type ProjectDetails = {
 export const projectData: ProjectDetails[] = [
     {
       title: "PopGen",
-      desc: "A browser plugin to autofill listings on Depop",
+      desc: "A browser plugin to autofill listings on Depop using LLM functions.",
       link: "https://github.com/kakumuo/inventory-sync/tree/popgen",
       thumbnail: "/resources/popgen.png",
       techUsed: ["React", "Typescript", "LLM (LLaVA)"],
@@ -35,7 +35,7 @@ export const projectData: ProjectDetails[] = [
     },
     {
       title: "SSIS Jenkins Pipeline",
-      desc: "Create a Jenkins pipeline to automatically push SSIS and Stored Procedures to development and production MSSQL Servers.",
+      desc: "CI/CD Jenkins pipeline to automatically push SSIS and Stored Procedures to development and production MSSQL Servers.",
       // link: "https://smarthomehub.io",
       thumbnail: "/resources/jenkins.png",
       techUsed: ["Jenkins", "Groovy", "Powershell"],
@@ -45,7 +45,7 @@ export const projectData: ProjectDetails[] = [
     },
     {
       title: "CPS Contacts",
-      desc: "Developed an ETL Pipeline to push over 200M UPS MyChoice Contact and Account details to Salesforce for sales and claims purposes.",
+      desc: "An ETL Pipeline to push over 200M UPS MyChoice Contact and Account details to Salesforce for sales and claims purposes.",
       // link: "https://github.com/username/codementor-ai",
       thumbnail: "/resources/upsmychoice.png",
       techUsed: ["SSIS", "Java", "Python", "SQL", "Salesforce", "Maven"],
@@ -55,7 +55,7 @@ export const projectData: ProjectDetails[] = [
     },
     {
       title: "DigiBadge",
-      desc: "Developed a proof of concept for a digital mobile badge system. Developed during UPS Intern Hackathon. Presented findings to UPS CE/IO.",
+      desc: "A proof of concept for a digital mobile badge system. Developed during UPS Intern Hackathon. Presented findings to UPS CE/IO.",
       // link: "https://urbanfarmer.app",
       thumbnail: "/resources/digitalbadge.png",
       techUsed: ["AWS", "Axure RP8", "Swift", "Firebase", "React" ],
@@ -65,7 +65,7 @@ export const projectData: ProjectDetails[] = [
     }, 
     {
       title: "Walkability Metric",
-      desc: "Developed plugin for Rhino to measure walkability of different locations using GIS data. Presented findings to KPF Architecture Firm.",
+      desc: "A Rhino plugin to measure walkability of different locations using GIS data. Presented findings to KPF Architecture Firm.",
       // link: "https://urbanfarmer.app",
       thumbnail: "/resources/walkability.png",
       techUsed: ["Rhino", "Python"],
@@ -146,17 +146,22 @@ export const aboutDetails = {
     {
       phrases: [
         { text: "Experienced software developer with a strong background in" },
-        { text: " Backend ", lookAt: { caption: "Working on server-side software, which focuses on everything you can't see on a website" } },
+        { text: " Backend ", lookAt: {} },
         { text: " and " },
-        { text: " ETL ", lookAt: { caption: "Extract Transform and Load" } },
+        { text: " ETL ", lookAt: {} },
         { text: "development. Currently working as a " },
-        { text: "Applicaiton Developer II at UPS", lookAt: { caption: "Current Role", link: "https://www.ups.com/us/en/home" } },
+        { text: "Applicaiton Developer II at UPS", lookAt: { caption: "/resources/ups.png", link: "https://www.ups.com/us/en/home" } },
         { text: ", where I've been instrumental in developing and improving critical processes for managing large-scale customer data." }
       ]
     },
     {
       phrases: [
-        { text: "Committed to continuous learning and applying cutting-edge solutions to complex business problems in the rapidly evolving field of software development." }
+
+        { text: "I am committed to continuous learning and applying"}, 
+        { text: " cutting-edge solutions ", lookAt: {} },
+        {text: "to" },
+        { text: " complex business problems ", lookAt: {} },
+        { text: "in the rapidly evolving field of software development."},
       ]
     }
   ]  
@@ -168,7 +173,6 @@ export type ColorScheme =  {
   labelFont:string, 
   
   primary:Color, // any color
-  secondary: Color, // bit lighter than primary, unless white, then a bit darker
   accent: Color, // primary compliment, visible over primary
   fontPrimary: Color, // negation of primary
   fontAccent: Color // fontPrimary compliment
@@ -247,47 +251,51 @@ class Color {
 export const sampleColorSchemes: ColorScheme[] = [
   {
     label: "Ocean Breeze",
-    labelFont: "'Courier New', Courier, monospace",
+    labelFont: `1rem 'WindSong', serif`,
     primary: new Color("#3498db"),
-    secondary: new Color("#2c3e50"),
-    accent: new Color("#e74c3c"),
-    fontPrimary: new Color("#333333"),
-    fontAccent: new Color("#ffffff")
+    accent: new Color("#BFA89E"),
+    fontPrimary: new Color("#EBF5EE"),
+    fontAccent: new Color("#283044")
   },
   {
     label: "Forest Harmony",
-    labelFont: "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif",
-    primary: new Color("#2ecc71"),
-    secondary: new Color("#34495e"),
-    accent: new Color("#e67e22"),
-    fontPrimary: new Color("#2c3e50"),
-    fontAccent: new Color("#ecf0f1")
+    labelFont: `1rem 'Calligraffitti', serif`,
+    primary: new Color("#00241B"),
+    accent: new Color("#BFA89E"),
+    fontPrimary: new Color("#EBF5EE"),
+    fontAccent: new Color("#78A1BB")
   },
   {
     label: "Sunset Glow",
-    labelFont: "'Montserrat', sans-serif",
-    primary: new Color("#e74c3c"),
-    secondary: new Color("#f39c12"),
-    accent: new Color("#9b59b6"),
-    fontPrimary: new Color("#2c3e50"),
-    fontAccent: new Color("#ecf0f1")
+    labelFont: `1rem "Grand Hotel", serif`,
+    primary: new Color("#D74E09"),
+    accent: new Color("#F2BB05"),
+    fontPrimary: new Color("#124E78"),
+    fontAccent: new Color("#F0F0C9")
   },
   {
     label: "Minimalist Mono",
-    labelFont: "'Open Sans', sans-serif",
+    labelFont: `1rem 'Impact', Haettenschweiler, 'Arial Narrow Bold', sans-serif`,
     primary: new Color("#ffffff"),
-    secondary: new Color("#f1f1f1"),
     accent: new Color("#333333"),
     fontPrimary: new Color("#777777"),
     fontAccent: new Color("#111122")
   },
   {
-    label: "Neon Nights",
-    labelFont: "'Orbitron', sans-serif",
+    label: "B-Chiang",
+    labelFont: "bold 1rem 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    primary: new Color("#0f172a"),
+    accent: new Color("#213255"),
+    fontPrimary: new Color("#ffffff"),
+    fontAccent: new Color("#5de6d4")
+  }, 
+  {
+    label: "Terminal",
+    labelFont: "1rem 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;",
     primary: new Color("#000000"),
-    secondary: new Color("#1a1a1a"),
     accent: new Color("#00ff00"),
     fontPrimary: new Color("#ffffff"),
     fontAccent: new Color("#00ff00")
-  }
+  }, 
+
 ];

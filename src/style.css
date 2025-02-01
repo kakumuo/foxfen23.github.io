@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&family=Graduate&family=Grand+Hotel&family=Orbitron:wght@400..900&family=WindSong:wght@400;500&display=swap');
+
 :root{
     --width-leftsidebar: 50px;
     --width-rightsidebar: 50px;
@@ -348,6 +350,7 @@
     p {
       margin: 0;
       padding-right: 10px;
+      padding-bottom: 4px;
     }
   
     .color-list {
@@ -356,10 +359,11 @@
       gap: 3px;
   
       .color-display {
-        width: 20px;
+        width: 32px;
         height: 10px;
-        border-radius: 8px;
+        border-radius: 4px;
         margin-right: 5px;
+        border: solid 1px;
       }
     }
   }
