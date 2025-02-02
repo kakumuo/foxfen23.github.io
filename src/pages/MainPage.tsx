@@ -54,7 +54,7 @@ export const MainPage = () => {
     const [targetSchemeI, setTargetSchemeI] = React.useState(appContext.schemeI); 
     const clrScheme = sampleColorSchemes[appContext.schemeI]
     
-    const [projectCardData, setProjectCardData] = React.useState(projectData.filter((_, i) => i < 4).map(p => {
+    const [projectCardData, setProjectCardData] = React.useState(projectData.filter((_, i) => i <= 3).map(p => {
         return {
           aside: {type: 'img', val: p.thumbnail}, 
           desc: p.desc, 
@@ -64,7 +64,7 @@ export const MainPage = () => {
         } as CardData
     }))
 
-    const [cardData, setCardData] = React.useState(experienceData.filter(d => Math.abs(d.startDate.getFullYear() - new Date().getFullYear()) < 7).map(d => {
+    const [cardData, setCardData] = React.useState(experienceData.filter((_, i) => i <= 2).map(d => {
         return {
             aside: {type: 'text', val: getStartEndDate(d)}, 
             desc: d.desc, 
@@ -101,11 +101,11 @@ export const MainPage = () => {
         appContext.setSchemeI(target) 
 
         document.documentElement.style.setProperty("--selection-bkg", 
-            sampleColorSchemes[target].accent.toString()
+            sampleColorSchemes[target].fontAccent.toString()
         )
 
         document.documentElement.style.setProperty("--selection-color", 
-            sampleColorSchemes[target].accent.grade(200).toString()
+            sampleColorSchemes[target].fontAccent.grade(150).toString()
         )
     }, [hoverSchemeI, targetSchemeI])
 
