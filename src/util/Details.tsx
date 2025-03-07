@@ -14,6 +14,14 @@ export type ProjectDetails = {
 
 export const projectData: ProjectDetails[] = [
     {
+      title: 'Midi-Assist', 
+      desc: 'A webapp to visualize midi inputs from piano or keyboard', 
+      link: 'https://github.com/kakumuo/midi-assistant', 
+      thumbnail: 'https://github.com/kakumuo/midi-assistant/raw/master/concept/sc1.png', 
+      techUsed: ["React", "WebMidi", "Typescript"], 
+      year: 2025
+    },
+    {
       title: "PopGen",
       desc: "A browser plugin to autofill listings on Depop using LLM functions.",
       link: "https://github.com/kakumuo/inventory-sync/tree/popgen",
